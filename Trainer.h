@@ -3,9 +3,10 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+// required header-file
 #include <iostream>
 #include <cmath>
+#include <math.h>
 #include "Building.h"
 #include "PokemonCenter.h"
 #include "PokemonGym.h"
@@ -52,6 +53,7 @@ class Trainer : public GameObject {
         Trainer();
         Trainer(char in_code);
         Trainer(string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc);
+        ~Trainer();
         void StartMoving(Point2D dest);
         void StartMovingToGym(PokemonGym* gym);
         void StartMovingToCenter(PokemonCenter* center);

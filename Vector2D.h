@@ -3,10 +3,12 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+// required header-file
 #include <iostream>
 #include <cmath>
 
+using namespace std;
+g++
 
 // prototyped
 #ifndef VECTOR2D.H

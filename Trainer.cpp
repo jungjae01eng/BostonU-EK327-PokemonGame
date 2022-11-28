@@ -3,84 +3,209 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+/*
+ * "instruction" is the steps given on the assignments.
+ * clarified it to organize and show difference between steps from the assignments and comment from myself
+ */
+
+// required header-file
 #include <iostream>
 #include <cmath>
+#include <math.h>
+#include <time.h>   // generate random variables using time
 #include "Trainer.h"
 
 using namespace std;
 
 
 Trainer :: Trainer() {
-    // initialize the speed to 5 and outputs a message: "Trainer default constructed."
+    // instruction_1: initializes the speed to 5
     speed = 5;
+
+    // instruction_1: outputs a message: "Trainer default constructed."
     cout << "Trainer default constructed." << endl;
 }
 
 Trainer :: Trainer(char in_code) {
-    // initialize the speed to 5 and outputs a message: "Trainer constructed."
-    // initialize State = STOPPED
-    // initialize Display_code = in_code
+    // instruction_1: initializes the speed to 5
     speed = 5;
+
+    // instruction_1: and outputs a message: "Trainer constructed."
     cout << "Trainer constructed." << endl;
+
+    // instruction_2: initialize State = STOPPED
     state = STOPPED;
+
+    // instruction_2: initialize Display_code = in_code
     display_code = in_code;
 }
 
 Trainer :: Trainer(string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc) {
-    // initialize the speed to in_speed and sets name to in_name
-    // outputs a message: "Trainer constructed"
+    // instruction_1: initializes the speed to in_speed
     speed = in_speed;
+
+    // instruction_1: sets name to in_name
     name = in_name;
+
+    // instruction_2: outputs a message: "Trainer constructed."
     cout << "Trainer constructed." << endl;
 }
 
 void Trainer :: StartMoving(Point2D dest) {
-    // tells the trainer to start moving
-    // calls the setup_destination() function
-    // sets the state to MOVING
-    // if the trainer is already at the destination print "(display_code)(id): I'm already there. See?"
-    // if the trainer is infected print "(display_code)(id): My pokemon have fainted. I may move but you cannot see me."
-    // otherwise prints "(display_code)(id): On my way."
+    // tells the Trainer to start moving
+    // instruction_2: calls the setup_destination() function
+    this -> SetupDestination(dest -> GetLocation());
 
-    void SetUpDestination(Point2D dest);    // call the set
+    // instruction_3: sets the state to MOVING
     state = MOVING;
 
-    // if (location == dest) {
+    // instruction_4: if the trainer is already at the destination, print "(display_code)(id): I'm already there. See?"
+    // instruction_6: otherwise prints "(display_code)(id): On my way."
+    // instruction_5: if the trainer is infected print "(display_code)(id): My pokemon have fainted. I may move, but you cannot see me."
+    if (state == FAINTED) {
+        // if Trainer is fainted. Assume infected = fainted
+        cout << "(" << display_code << ")(" << id_num << "): My pokemon have fainted. I may move, but you cannot see me." << endl;
+    } else if (GetDistanceBetween(destination, location) == 0) {
+        // if the location is same as destination, it arrived
+        cout << "(" << display_code << ")(" << id_num << "): I am already there. See?" << endl;
+    } else {
+        cout << "(" << display_code << ")(" << id_num << "): On my way." << endl;
+    }
 
-    // }
-
-
+    return;
 }
 
 void Trainer :: StartMovingToGym(PokemonGym* gym) {
-    //
+    // tells the Trainer to start moving to a PokemonGym
+    current_center = gym;
+
+    // instruction_2: calls the SetupDestination() function with PokemonGym's location as the destination
+    this -> SetupDestination(gym -> GetLocation());
+
+    // instruction_3: sets the state to MOVING_TO_GYM
+    state = MOVING_TO_GYM;
+
+    // instruction_4: if the Trainer is fainted, print "(display_code)(id): My Pokemon have fainted, so I can't move to gym..."
+    // instruction_6: if the trainer is already there, print "(display_code)(id): I am already at the PokemonGym!"
+    // instruction_5: prints the message "(display_code)(id): on my way to gym (gym id)."
+    if (state == FAINTED) {
+        cout << "(" << display_code << ")(" << id_num << "): My pokemon have fainted, so I can't move to gym..." << endl;
+    } else if (GetDistanceBetween(destination, location) == 0) {
+        cout << "(" << display_code << ")(" << id_num << "): I am already at the PokemonGym!" << endl;
+    } else {
+        cout << "(" << display_code << ")(" << id_num << "): On my way to gym (" << gym->GetId() << ")" << endl;
+    }
+
+    return;
 }
 
 void Trainer :: StartMovingToCenter(PokemonCenter* center) {
-    //
+    // tells the Trainer to start moving to a PokemonCenter
+    current_center = center;
+
+    // instruction_2: calls the SetupDestination() function with PokemonCenter's location as the destination
+    this -> SetupDestination(center -> GetLocation());
+
+    // instruction_3: sets the state to MOVING_TO_CENTER
+    state = MOVING_TO_CENTER;
+
+    // instruction_4: if the Trainer's pokemon have fainted print "(display_code)(id): My pokemon have fainted, so I should have gone to the center..."
+    // instruction_6: if Trainer is already there, print "(display_code)(id): I am already at the Center!"
+    // instruction_5: prints the message "(display_code)(id): On my way to Center (center id)"
+    if (state == FAINTED) {
+        cout << "(" << display_code << ")(" << id_num << "): My pokemon have fainted, so I should have gone to the center..." << endl;
+    } else if (GetDistanceBetween(destination, location) == 0) {
+        cout << "(" << display_code << ")(" << id_num << "): I am already at the Center!" << endl;
+    } else {
+        cout << "(" << display_code << ")(" << id_num << "): On my way to Center (" << center->GetId() << ")" << endl;
+    }
+
+    return;
 }
 
 void Trainer :: StartBattling(unsigned int num_battles) {
-    //
+    // tells the Trainer to start battling (num_battles) in a PokemonGym
+    // instruction_2: sets the state to BATTLING_IN_GYM
+    state = BATTLING_IN_GYM;
+
+    // instruction_2: if Trainer's pokemon are too tired, prints the message "(display_code)(id): My Pokemon have fainted, so no more battles for me..."
+    // instruction_2: if Trainer is not in a PokemonGym, prints the message "(display_code)(id): I can only battle in a PokemonGym!"
+    // instruction_3: if Trainer does not have enough PokeDollars, prints "(display_code)(id): Not enough money for battles"
+    // instruction_4: if the current_gym is done, print "(display_code)(id): Cannot battle! This PokemonGym has no more trainers to battle!"
+    // instruction_5: if the Trainer can start training, set its num_battles to the requested battles and update the remaining battles in the gym
+    // instruction_2: if above instruction_2 conditions are false, prints the message "(display_code): Started to battle at the PokemonGym (gym id) with (number of battles) battles"
+    if (state == FAINTED) {
+        // assume "too tired" is FAINTED
+        cout << "(" << display_code << ")(" << id_num << "): My pokemon have fainted, so no more battles for me..." << endl;
+    } else if (state != IN_GYM) {
+        cout << "(" << display_code << ")(" << id "): I can only battle in a PokemonGym!" << endl;
+    } else if (PokeDollars < battles_to_buy) {
+        // not enough PokeDollars
+        cout << "(" << display_code << ")(" << id << "): Not enough money for battles" << endl;
+    } else if (current_gym -> passed()) {
+        // current_gym is done
+        cout << "(" << display_code << ")(" << id << "): Cannot battle! This PokemonGym has no more trainers to battle!" << endl;
+    } else {
+        state = BATTLING_IN_GYM;
+        if (num_battles > current_gym -> GetNumBattlesRemaining()) {
+            battles_to_buy = current_gym -> GetNumBattlesRemaining();
+        } else {
+            battles_to_buy = num_battles;
+        }
+        cout << "(" << display_code << "): Started to battle at the PokemonGym (" << gym id << ") with (" << num_battles << ") battles" << endl;
+    }
+
+    return;
 }
 
 void Trainer :: StartRecoveringHealth(unsigned int num_potions) {
-    //
+    // tells the Trainer to start recovering at a PokemonCenter
+    // instruction_2: sets the state to RECOVERING_HEALTH
+    state = RECOVERING_HEALTH;
+
+    // instruction_2: prints the message "(display_code)(id): Started recovering (num_potions) potions at Pokemon Center (current_center_id)"
+    cout << "(" << display_code << ")(" << id << "): Started recovering (" << num_potions << ") potions at Pokemon Center (" << current_center << ")" << endl;
+
+    // instruction_3: if the Trainer does not have enough PokeDollars, prints "(display_code)(id): Not enough money to recover health."
+    if (PokeDollars < battles_to_buy) {
+        cout << "(" << display_code << ")(" << id_num << "): Not enough money to recover health." << endl;
+    }
+
+    // instruction_3: if the Pokemon Center does not have at least one potion remaining, print "(display_code)(id): Cannot recover! No potion remaining in this Pokemon Center."
+    // instruction_3: if the Trainer is not in a Pokemon Center, print "(display_code)(id): I can only recover health at a Pokemon Center!"
+    // instruction_3: if above instruction_3 false, sets the state to RECOVERING_HEALTH
+    // instruction_3: if above instruction_3 false, prints the message "(display_code)(id): Started recovering (num_potions) potions at Pokemon Center (current_center_id)."
+    if (num_potions < 1) {
+        cout << "(" << display_code << ")(" << id << "): Cannot recover! No potion remaining in this Pokemon Center." << endl;
+    } else if (state != AT_CENTER) {
+        cout << "(" << display_code << ")(" << id_num << "): I can only recover health at a Pokemon Center!" << endl;
+    } else {
+        state = RECOVERING_HEALTH;
+        cout << "(" << display_code << ")(" << id << "): Started recovering " << num_potions << " potions at Pokemon Center " << current_center << "." << endl;
+    }
+
+    // instruction_4: if the Trainer can start recovering health, set its potions_to_buy to the minimum of the requested potions'
+    // instruction_4: if the Trainer can start recovering health, update the remaining potions in the center
+
+
+    // instruction_5: Five health is recovered for each potion purchased
+
+    return;
 }
 
 void Trainer :: Stop() {
-    // tells trainer to stop doing whatever it was doing
-    // sets the state to STOPPED
-    // prints "(display_code)(id): Stopping.."
-    
-
+    // tells the Trainer to stop doing whatever it was doing
+    // instruction_2: sets the state to STOPPED
     state = STOPPED;
-    cout << "(" << display_code << ")(" << id_num << "): Stopping" << endl;
+
+    // instruction_3: prints "(display_code)(id): Stopping..."
+    cout << "(" << display_code << ")(" << id_num << "): Stopping..." << endl;
+
+    return;
 }
 
 bool Trainer :: HasFainted() {
-    // returns true if health is 0
+    // instruction_1: returns true if health is 0
     if (health == 0) {
         return true;
     } else {
@@ -89,7 +214,7 @@ bool Trainer :: HasFainted() {
 }
 
 bool Trainer :: ShouldBeVisible() {
-    // return true if the trainer is not fainted
+    // instruction_1: returns true if the Trainer is NOT fainted
     if (HasFainted() == true) {
         return false;
     } else {
@@ -98,26 +223,204 @@ bool Trainer :: ShouldBeVisible() {
 }
 
 void Trainer :: ShowStatus() {
-    // prints "(name) status: "
-    // call GameObject::ShowStatus()
-    
+    // instruction_1: prints "(name) status: "
+    cout << name << " status: " << endl;
+
+    // instruction_2: call GameObject::ShowStatus()
+    this -> GameObject::ShowStatus();
+
+    // instruction_3: print state specific status information depends on Update() function
+    switch(state) {
+        case 0:     // STOPPED
+            // instruction_1: ShowStatus() prints "stopped"
+            cout << "stopped" << endl;
+            break;
+        case 1:     // MOVING
+            // instruction_1: ShowStatus() prints "moving at speed of (speed) to destination <x, y> at each step of (delta)."
+            cout << "moving at speed of " << speed << ") to destination <" << destination.x << ", " << destination.y << "> at each step of (" << delta << ")." << endl;
+            break;
+        case 2:     // FAINTED
+            // quit the game
+            break;
+        case 3:     // AT_CENTER
+            // instruction_1: ShowStatus() prints "inside Pokemon Center (current_Center id)."
+            cout << "inside Pokemon Center (" << current_Center << ")." << endl;
+            break;
+        case 4:     // IN_GYM
+            // instruction_1: ShowStatus() prints "inside PokemonGym (current_gym id)."
+            cout << "inside PokemonGym (" << current_gym << ")." << endl;
+            break;
+        case 5:     // MOVING_TO_CENTER
+            // instruction_1: ShowStatus() prints "heading to PokemonCenter (current_Center id) at a speed of (speed) at each step of (delta)."
+            cout << "heading to PokemonCenter " << current_Center << " at a speed of " << speed << " at each step of " << delta << "." << endl;
+            break;
+        case 6:     // MOVING_TO_GYM
+            // instruction_1: ShowStatus() prints "heading to PokemonGym (current_gym id) at a speed of (speed) at each of (delta)."
+            cout << "heading to PokemonGym " << current_gym << " at a speed of " << speed << " at each of " << delta << "." << endl;
+            break;
+        case 7:     // BATTLING_IN_GYM
+            // instruction_1: ShowStatus() prints "battling in PokemonGym (current_gym id)."
+            cout << "battling in PokemonGym " << current_gym << "." << endl;
+            break;
+        case 8:     // RECOVERING_HEALTH
+            // instruction_1: ShowStatus() prints "recovering health in Pokemon Center (current_Center id)."
+            cout << "recovering health in Pokemon Center " << current_Center << "." << endl;
+            break;
+    }
+
+    return;
 }
 
 bool Trainer :: Update() {
-    //
-    
+    // Update() function contains a big switch statement
+    // return true whenever the state is changed
+    // return false if the state stays the same
+    // all sates print "Health: (health)", "PokeDollars: (PokeDollars):, "Experience: (experience)"
+
+    // instruction_0: if Trainer runs out of health, print "(name) is out of health and can't move"
+    // instruction_0: set state to FAINTED
+
+    bool boolLocationTest;
+    boolLocationTest = bool UpdateLocation();   // return true if arrived
+
+    switch (TrainerStates) {
+        case STOPPED:
+            // The Trainer does nothing and stays in this state
+            // instruction_2: Update() return false
+            return false;
+        case MOVING:
+            // instruction_2: Update() should call UpdateLocation() to take a step
+            this -> UpdateLocation();
+
+            // instruction_2: Update() should set the state to STOPPED if the object has arrived
+            // instruction_2: Update() should stay in the MOVING state if it has not arrived yet
+            // instruction_2: Update() should return true if the object has arrived
+            if (GetDistanceBetween(destination, location) == 0) {
+                state = STOPPED;
+                return true;
+            } else {
+                state = MOVING;
+                return false;
+            }
+        case FAINTED:
+        case AT_CENTER:
+            // instruction_2: Update() should return false
+            return false;
+        case IN_GYM:
+            // instruction_2: Update() should return false
+            return false;
+        case MOVING_TO_CENTER:
+            // instruction_2: Update() should call UpdateLocation()
+            this -> UpdateLocation();
+
+            // instruction_2: Update() should set the state to AT_CENTER if it has arrived
+            // instruction_2: Update() should stay in the current state if it has not arrived yet
+            // instruction_2: Update() should return true if it has arrived
+            if (GetDistanceBetween(destination, location) == 0) {
+                state = AT_CENTER;
+                return true;
+            } else if (GetDistanceBetween(destination, location) != 0) {
+                state = MOVING_TO_GYM;
+                return false;
+            }
+        case MOVING_TO_GYM:
+            // instruction_2: Update() should call UpdateLocation()
+            this -> UpdateLocation();
+
+            // instruction_2: Update() should set the state to IN_GYM if it has arrived
+            // instruction_2: Update() should stay in the MOVING state if it has not arrived yet
+            // instruction_2: Update() should return true if it has arrived
+            if (GetDistanceBetween(destination, location) == 0) {
+                state = IN_GYM;
+                return true;
+            } else if (GetDistanceBetween(destination, location) != 0) {
+                state = MOVING;
+                return false;
+            }
+        case BATTLING_IN_GYM:
+            // instruction_2: Update() should reduce Trainer health based on total health cost for the current gym request
+            health -= current_gym -> GetHealthCost(battles_to_buy);
+
+            // instruction_2: Update() should reduce the amount of PokeDollars based on the dollar cost for the current gym request
+            PokeDollars -= current_gym -> GetPokeDollarCost(battles_to_buy);
+
+            // instruction_2: Update() should increase Trainer experience based on experience gain for the current gym request (should be calculated using TrainTrainer() function)
+            unsigned int experience_gained = current_gym -> TrainPokemon(battles_to_buy);
+
+            // instruction_2: Update() should print "** (name) completed (battles_to_buy) battle(s)! **"
+            cout << "** " << name << " completed " << battles_to_buy << " battle(s)! **" << endl;
+
+            // instruction_2: Update() should print "** (name) gained (experience gained) experience! **"
+            cout << "** " << name << " gained " << experience_gained << " experience! **"
+
+            // instruction_2: Update() should set state to IN_GYM
+            state = IN_GYM;
+
+            // instruction_2: Update() should return true
+            return true;
+        case RECOVERING_HEALTH:
+            // instruction_2: Update() should increase Health (Health should be calculated by StartRecoveringHealth() function)
+            unsigned int health_gain = potions_to_buy * 5;
+            health += health_gain;
+
+            // instruction_2: Update() should reduce PokeDollars by the total cost of potions for the current PokemonCenter
+            PokeDollars -= current_center -> GetPokeDollarCost(potions_to_buy);
+
+            // instruction_2: Update() should prints "** (name) recovered (health recovered) health! **"
+            cout << "** " << name << " recovered " << health_gain << " health! **" << endl;
+
+            // instruction_2: Update() should prints "** (name) bought (potions_received) potion(s)! **"
+            cout << "** " << name << " bought " << potions_to_buy << " potion(s)! **" << endl;
+
+            // instruction_2: Update() should set state to AT_CENTER
+            state = AT_CENTER;
+
+            // instruction_2: Update() should return true
+            return true;
+    }
 }
 
 bool Trainer :: UpdateLocation() {
-    //
+    // if arrived, return true
+    // instruction_1: updates the object's location while it is moving
+    // an object is within the step of the destination if the absolute value of both the x and y components of fabs(destination - location) are less than or equal to the delta
+    if (fabs(destination.x, location.x) <= delta.x && fabs(destination.y, location.y) <= delta.y) {
+        location = destination;
+    } else {
+        this -> location.x += delta.x;
+        this -> location.y += delta.y;
+    }
+
+    // instruction_2: if Trainer has arrived at its destination, prints "(display_code)(id): I'm there!"
+    // instruction_3: if instruction_2 is false, prints "(display_code)(id): step..."
+    if (GetDistanceBetween(destination, location) == 0) {
+        cout << "(" << display_code << ")(" << id_num << "): I'm there!" << endl;
+        return true;
+    } else {
+        cout << "(" << display_code << ")(" << id_num << "): step..." << endl;
+
+        // instruction_0: decrease the health by 1 for each "speed-sized" step for any time the Trainer moves
+        // instruction_0: increase the dollar count by a random amount for any time te Trainer moves
+
+        return false;
+    }
 }
 
 void Trainer :: SetupDestination(Point2D dest) {
-    // set up the object to start moving to dest
-    // calculate delta
-    // find the dest - location using Point2D opeartor -
-    double difference;
-    // difference = Vector2D operator - (dest, location);
-    // delta = difference * (speed/GetDistanceBetween(dest, location));
+    // sets up the object to start moving to destination
+    destination = dest;
 
+    delta.x = (destination.x - location.x) * (speed/GetDistanceBetween(destination, location));
+    delta.y = (destination.y - location.y) * (speed/GetDistanceBetween(destination, location));
+    return;
+}
+
+double GetRandomAmountOfPokeDollars() {
+    // instruction_1: returns a random number between 0.0 and 2.0 inclusive
+    double min = 0.0;
+    double max = 2.0;
+    double range = max - min + 1.0;
+
+    srand(time(NULL));
+    return (double) rand() % range + max;
 }

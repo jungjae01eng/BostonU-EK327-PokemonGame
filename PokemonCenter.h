@@ -3,7 +3,7 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+// required header-file
 #include <iostream>
 #include <cmath>
 #include "Building.h"
@@ -28,6 +28,7 @@ class PokemonCenter : public Building {
     public:
         PokemonCenter();
         PokemonCenter(int in_id, double potion_cost, unsigned int potion_cap, Point2D in_loc);
+        ~PokemonCenter();
         bool HasPotions();
         unsigned int GetNumPotionRemaining();
         bool CanAffordPotion(unsigned int potion, double budget);

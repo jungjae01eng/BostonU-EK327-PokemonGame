@@ -3,7 +3,7 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+// required header-file
 #include <iostream>
 #include <cmath>
 #include "Point2D.h"
@@ -65,7 +65,7 @@ Vector2D operator / (Vector2D v1, double d) {
 }
 
 ostream& operator << (ostream& out, Vector2D v1) {
-    // overloaded opeartor: return output formatted as <x, y>
+    // overloaded operator: return output formatted as <x, y>
     out << "<" << v1.x << ", " << v1.y << ">";
 
 

@@ -3,7 +3,7 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+// required header-file
 #include <iostream>
 #include <cmath>
 #include "Building.h"
@@ -30,6 +30,7 @@ class PokemonGym : public Building {
     public:
         PokemonGym();
         PokemonGym(unsigned int max_battle, unsigned int health_loss, double PokeDollar_cost, unsigned int exp_per_battle, int in_id, Point2D in_loc);
+        ~PokemonGym();
         double GetPokeDollarCost(unsigned int battle_qty);
         unsigned int GetHealthCost(unsigned int battle_qty);
         unsigned int GetNumBattlesRemaining();

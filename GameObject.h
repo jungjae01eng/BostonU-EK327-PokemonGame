@@ -3,7 +3,7 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+// required header-file
 #include <iostream>
 #include <cmath>
 #include "Point2D.h"
@@ -24,7 +24,7 @@ class GameObject {
         char state;         // state of the object
 
     public:
-        GameObject();       // the notes did not required but default it required
+        GameObject();       // the notes stated the default is not required, but website stated it is required
         GameObject(char in_code);
         GameObject(Point2D in_loc, int in_id, char in_code);
         ~GameObject();      // destructor

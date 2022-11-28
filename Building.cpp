@@ -3,7 +3,7 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+// required header-file
 #include <iostream>
 #include <cmath>
 #include "Building.h"
@@ -27,22 +27,17 @@ Building :: Building (char in_code, int in_Id, Point2D in_loc)
     location = in_loc;
     display_code = in_code;
     state = 0;
-
 }
 
 void Building :: AddOneTrainer () {
     // increments trainer_count by one
     trainer_count++;
-
-
     return;
 }
 
 void Building :: RemoveOneTrainer () {
     // decrements trainer_count by one
     trainer_count--;
-
-
     return;
 }
 
@@ -51,12 +46,10 @@ void Building :: ShowStatus () {
     // prints "(trainer_count) trainers is/are in this building"
     cout << "(" << display_code << ")(" << GetId() << " at (" << GetLocation() << ")" << endl;
     cout << "(" << trainer_count << ") trainers is/are in this building" << endl;
-
-
     return;
 }
 
 bool Building :: ShouldBeVisible () {
-    // returns true becasue buildings are always visible
+    // returns true because buildings are always visible
     return true;
 }

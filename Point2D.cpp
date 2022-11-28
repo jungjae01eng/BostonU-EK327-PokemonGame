@@ -3,11 +3,10 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+// required header-file
 #include <iostream>
 #include <cmath>
 #include "Point2D.h"
-#include "Vector2D.h"
 
 using namespace std;
 
@@ -41,7 +40,7 @@ double GetDistanceBetween (Point2D p1, Point2D p2) {
 }
 
 ostream& operator << (ostream& out, Point2D p1) {
-    // overloaded opeartor: return output formatted as (x, y)
+    // overloaded operator: return output formatted as (x, y)
     out << "(" << p1.x << ", " << p1.y << ")";
 
 
@@ -49,7 +48,7 @@ ostream& operator << (ostream& out, Point2D p1) {
 }
 
 Point2D operator + (Point2D p1, Vector2D v1) {
-    // overloaded opeartor: add p1 and v1
+    // overloaded operator: add p1 and v1
     double x;
     double y;
 
@@ -65,7 +64,7 @@ Point2D operator + (Point2D p1, Vector2D v1) {
 }
 
 Vector2D operator - (Point2D p1, Point2D p2) {
-    // overloaded opeartor: subtract p1 and p2
+    // overloaded operator: subtract p1 and p2
     double x;
     double y;
 

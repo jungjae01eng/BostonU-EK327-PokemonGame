@@ -3,7 +3,7 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+// required header-file
 #include <iostream>
 #include <cmath>
 #include "GameObject.h"
@@ -22,6 +22,7 @@ class Building : public GameObject {
     public:
         Building();
         Building(char in_code, int in_Id, Point2D in_loc);
+        ~Building();
         void AddOneTrainer();
         void RemoveOneTrainer();
         void ShowStatus();

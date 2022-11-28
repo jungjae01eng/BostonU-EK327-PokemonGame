@@ -3,11 +3,9 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+// required header-file
 #include <iostream>
 #include <cmath>
-#include "Point2D.h"
-#include "Vector2D.h"
 #include "GameObject.h"
 
 using namespace std;
@@ -48,7 +46,5 @@ char GameObject :: GetState() {
 void GameObject :: ShowStatus() {
     // outputs "(display_code)(id_num) at (location)""
     cout << "(" << display_code << ")(" << GetId() << " at (" << GetLocation() << ")" << endl;
-    
-    
     return;
 }

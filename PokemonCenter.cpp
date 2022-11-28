@@ -3,7 +3,7 @@
 // EC 327 Programming Assignment 3
 // November 23, 2022
 
-// required headerfile
+// required header-file
 #include <iostream>
 #include <cmath>
 #include "PokemonCenter.h"
@@ -88,29 +88,29 @@ unsigned int PokemonCenter :: DistributePotion(unsigned int potion_needed) {
 }
 
 bool PokemonCenter :: Update() {
-    // if PokemonCenter has no potions remaining:
-    //  state to NO_POTIONS_AVAILABLE
-    //  display_code to 'c'
-    //  print out "PokemonCenter (id number) has ran out of potions."
-    //  returns true if potion is depleted
-    //  returns false if it is not depleted
-    state = NO_POTIONS_AVAILABLE;
-    display_code = 'c';
-    cout << "PokemonCenter (" << GetId() << ") has ran out of potions." << endl;
-    
-    if (potion_capacity > 0) {
-        return false;
-    } else if (potion_capacity == 0) {
+    // if PokemonCenter has no potions remaining, set state to NO_POTIONS_AVAILABLE
+    // if PokemonCenter has no potions remaining, display_code to 'c'
+    // if PokemonCenter has no potions remaining, print out "PokemonCenter (id number) has run out of potions."
+    // if PokemonCenter has no potions remaining, returns true if potion is depleted
+    // if PokemonCenter has no potions remaining, returns false if it is not depleted
+    if (potion_capacity == 0) {
+        state = NO_POTIONS_AVAILABLE;
+        display_code = 'c';
+        cout << "PokemonCenter " << GetId() << " has run out of potions." << endl;
         return true;
+    } esle if (potion_capacity > 0) {
+        return false;
     }
 }
 
 void PokemonCenter :: ShowStatus() {
     // outputs the message "PokemonCenter Status: "
-    // outputs cals Building::ShowStatus()
+    cout << "PokemonCenter Status: ";
+
+    // calls Building::ShowStatus()
+    this -> Building :: ShowStatus();
+
     // outputs the message "PokeDollars per potion: (cost_per_potion)"
     // outputs the message "has (potion_remaining) potion(s) remaining."
-    cout << "PokemonCenter Status: ";
-    // cout << ShowStatus() << endl;
-    cout << "PokeDollars per potion: (" << pokedollar_cost_per_potion << ")" << " has (" << num_potions_remaining << ") potion(s) remaining.";
+    cout << "PokeDollars per potion: " << pokedollar_cost_per_potion << " has " << num_potions_remaining << " potion(s) remaining." << endl;
 }
