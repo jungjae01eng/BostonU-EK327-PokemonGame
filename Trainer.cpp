@@ -23,26 +23,22 @@ Trainer :: Trainer() {
     // instruction_1: initializes the speed to 5
     speed = 5;
 
-    // instruction_1: outputs a message: "Trainer default constructed."
-    cout << "Trainer default constructed." << endl;
-
-    return;
+    // instruction_1: outputs a message: "Trainer default constructed!"
+    cout << "Trainer default constructed!" << endl;
 }
 
 Trainer :: Trainer(char in_code) {
     // instruction_1: initializes the speed to 5
     speed = 5;
 
-    // instruction_1: and outputs a message: "Trainer constructed."
-    cout << "Trainer constructed." << endl;
+    // instruction_1: and outputs a message: "Trainer constructed!"
+    cout << "Trainer constructed!" << endl;
 
     // instruction_2: initialize State = STOPPED
     state = STOPPED;
 
     // instruction_2: initialize Display_code = in_code
     display_code = in_code;
-    
-    return;
 }
 
 Trainer :: Trainer(string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc) {
@@ -52,32 +48,29 @@ Trainer :: Trainer(string in_name, int in_id, char in_code, unsigned int in_spee
     // instruction_1: sets name to in_name
     name = in_name;
 
-    // instruction_2: outputs a message: "Trainer constructed."
-    cout << "Trainer constructed." << endl;
-
-    return;
+    // instruction_2: outputs a message: "Trainer constructed!"
+    cout << "Trainer constructed!" << endl;
 }
 
 Trainer :: ~Trainer() {
-    cout << "Trainer destructed" << endl;
-    return;
+    // destructor
+    cout << "Trainer destructed!" << endl;
 }
 
 void Trainer :: StartMoving(Point2D dest) {
     // tells the Trainer to start moving
     // instruction_2: calls the setup_destination() function
-    // instruction_3: sets the state to MOVING
-    this -> state = MOVING;
+    destination = dest;
+    this -> setup_destination(Point2D destination);
 
-    // instruction_4: if the trainer is already at the destination, print "(display_code)(id): I'm already there. See?"
-    // instruction_6: otherwise prints "(display_code)(id): On my way."
     // instruction_5: if the trainer is infected print "(display_code)(id): My pokemon have fainted. I may move, but you cannot see me."
     if (state == FAINTED) {
         // if Trainer is fainted. Assume infected = fainted
-        cout << "(" << display_code << ")(" << id_num << "): My pokemon have fainted. I may move, but you cannot see me." << endl;
+        cout << display_code << id_num << ": My pokemon have fainted. I may move, but you cannot see me." << endl;
     } else if (GetDistanceBetween(destination, location) == 0) {
+        // instruction_4: if the trainer is already at the destination, print "(display_code)(id): I'm already there. See?"
         // if the location is same as destination, it arrived
-        cout << "(" << display_code << ")(" << id_num << "): I am already there. See?" << endl;
+        cout << display_code << id_num << ": I am already there. See?" << endl;
     } else {
         if (state == IN_GYM) {
             current_gym -> RemoveOneTrainer();
@@ -85,9 +78,13 @@ void Trainer :: StartMoving(Point2D dest) {
             current_center -> RemoveOneTrainer();
         }
         
-        this -> state = MOVING;
-        SetupDestination(dest);
-        cout << "(" << display_code << ")(" << id_num << "): On my way." << endl;
+       // instruction_3: sets the state to MOVING
+        state = MOVING;
+
+        // instruction_6: otherwise prints "(display_code)(id): On my way."
+        cout << display_code << id_num << ": On my way." << endl;
+
+//        SetupDestination(dest);
     }
 
     return;

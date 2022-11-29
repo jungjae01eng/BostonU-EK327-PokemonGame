@@ -17,15 +17,17 @@ Building :: Building ()    // default constructor
     display_code = 'B';
 }
 
-Building :: Building (char in_code, int in_Id, Point2D in_loc)
+Building :: Building (char in_code, int in_Id, Point2D in_loc) {
     // initialize id number to in_Id
-    // initialize location to in_loc
-    // initialize display_code to in_code
-    // initialize remainder of the member variables to their default initial values
-{
     id_num = in_Id;
+
+    // initialize location to in_loc
     location = in_loc;
+
+    // initialize display_code to in_code
     display_code = in_code;
+
+    // initialize remainder of the member variables to their default initial values
     state = 0;
 }
 

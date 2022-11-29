@@ -6,8 +6,8 @@
 // required header-file
 #include <iostream>
 #include <cmath>
-#include "Point2D.h"
 #include "Vector2D.h"
+#include "Point2D.h"
 
 using namespace std;
 

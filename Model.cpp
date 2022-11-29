@@ -63,6 +63,7 @@ Model :: Model() {
 }
 
 Model :: ~Model() {
+    // destructor
     cout << "Model destructed" << endl;
     return;
 }

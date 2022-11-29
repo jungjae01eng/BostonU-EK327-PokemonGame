@@ -23,11 +23,11 @@ class PokemonGym : public Building {
     };
 
     private:
-        unsigned int num_battle_remaining;
-        unsigned int max_number_of_battles;
-        unsigned int health_cost_per_battle;
-        double PokeDollar_cost_per_battle;
-        unsigned int experience_per_battle;
+        unsigned int num_battle_remaining;      // amount of battles remaining in the PokemonGym
+        unsigned int max_number_of_battles;     // number of battles for the PokemonGym
+        unsigned int health_cost_per_battle;    // health of Pokemon lost for a single gym battle
+        double PokeDollar_cost_per_battle;      // entry cost oof single battle
+        unsigned int experience_per_battle;     // amount of experience gained from each class
     
     public:
         PokemonGym();

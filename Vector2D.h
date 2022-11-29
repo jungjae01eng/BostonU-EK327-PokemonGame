@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cmath>
 #include <string>
+#include "Point2D.h"
 
 using namespace std;
 

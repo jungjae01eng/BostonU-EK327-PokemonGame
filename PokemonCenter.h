@@ -23,9 +23,9 @@ class PokemonCenter : public Building {
     };
 
     private:
-        unsigned int potion_capacity;
-        unsigned int num_potions_remaining;
-        double pokedollar_cost_per_potion;
+        unsigned int potion_capacity;   // the maximum number of potions the PokemonCenter can hold
+        unsigned int num_potions_remaining; // the amount of potions currently in PokemonCenter
+        double pokedollar_cost_per_potion;  // per potion cost in PokemonCenter
 
     public:
         PokemonCenter();

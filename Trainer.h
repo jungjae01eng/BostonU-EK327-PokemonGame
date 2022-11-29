@@ -7,6 +7,9 @@
 #include <iostream>
 #include <cmath>
 #include <math.h>
+#include <time.h>   // generate random variables using time
+#include <string>
+
 #include "Building.h"
 #include "PokemonCenter.h"
 #include "PokemonGym.h"
