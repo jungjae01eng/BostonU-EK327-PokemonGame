@@ -30,7 +30,7 @@ Model :: Model() {
 
     Trainer* T2 = new Trainer("Misty", 2, 'T', 2, Point2D(10, 1));
     object_ptrs[1] = T2;
-    trainer_pts[1] - T2;
+    trainer_pts[1] = T2;
 
     // PokemonCenter
     PokemonCenter* C1 = new PokemonCenter(1, 1, 100, Point2D(1, 20));
@@ -66,15 +66,15 @@ Model :: ~Model() {
 }
 
 Trainer *GetTrainerPtr(int id) {
-
+    // return;
 }
 
 PokemonCenter *GetPokemonCenterPtr(int id) {
-
+    // return;
 }
 
 PokemonGym *GetPokemonGymPtr(int id) {
-
+    // return;
 }
 
 bool Model :: Update() {

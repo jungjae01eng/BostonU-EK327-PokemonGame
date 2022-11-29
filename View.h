@@ -18,7 +18,7 @@ const int view_maxsize = 20;
 
 class View {
     private:
-        int size;
+        int size;   // the current size of the grid to be displayed
         double scale;
         Point2D origin;
         char grid[view_maxsize][view_maxsize][2];

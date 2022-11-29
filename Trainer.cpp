@@ -85,7 +85,7 @@ void Trainer :: StartMoving(Point2D dest) {
         // instruction_6: otherwise prints "(display_code)(id): On my way."
         cout << display_code << id_num << ": On my way." << endl;
 
-//        SetupDestination(dest);
+        // ****** SetupDestination(dest);
     }
     return;
 }
@@ -192,10 +192,11 @@ void Trainer :: StartRecoveringHealth(unsigned int num_potions) {
         cout << display_code << id_num << ": Started recovering " << num_potions << " potions at Pokemon Center " << current_center -> GetId() << "." << endl;
 
         // instruction_3: if the Trainer can start recovering health, set its potions_to_buy to the minimum of the requested potions'
-        // potions_to_buy = ;
+        potions_to_buy = num_potions;
 
         // instruction_3: if the Trainer can start recovering health, update the remaining potions in the center
-        // PokemonCenter.GetNumPotionRemaining -> Update();
+        unsigned int GetNumPotionRemaining(potions_to_buy);
+        // ****************************************** is this correct? ^
 
         // instruction_4: Five health is recovered for each potion purchased
         health += (5 * num_potions);
@@ -256,6 +257,7 @@ void Trainer :: ShowStatus() {
             break;
         case 2:     // FAINTED
             // quit the game
+            // ****************************************** 
             break;
         case 3:     // AT_CENTER
             // instruction_1: ShowStatus() prints "inside Pokemon Center (current_Center id)."
@@ -287,8 +289,12 @@ void Trainer :: ShowStatus() {
 
 bool Trainer :: Update() {
     // Update() function contains a big switch statement
+
     // return true whenever the state is changed
+    // ******************************************  
+
     // return false if the state stays the same
+    // ******************************************  
 
     // all sates print "Health: (health)", "PokeDollars: (PokeDollars):, "Experience: (experience)"
     cout << "Health: " << health << endl;
@@ -305,7 +311,7 @@ bool Trainer :: Update() {
 
     switch (state) {
         case STOPPED:
-            // The Trainer does nothing and stays in this state
+            // the Trainer does nothing and stays in this state
             // instruction_2: Update() return false
             return false;
             break;
@@ -313,19 +319,21 @@ bool Trainer :: Update() {
             // instruction_2: Update() should call UpdateLocation() to take a step
             this -> UpdateLocation();
 
-            // instruction_2: Update() should set the state to STOPPED if the object has arrived
-            // instruction_2: Update() should stay in the MOVING state if it has not arrived yet
-            // instruction_2: Update() should return true if the object has arrived
             if (GetDistanceBetween(destination, location) == 0) {
+                // instruction_2: Update() should set the state to STOPPED if the object has arrived
                 state = STOPPED;
+
+                // instruction_2: Update() should return true if the object has arrived
                 return true;
             } else {
+                // instruction_2: Update() should stay in the MOVING state if it has not arrived yet
                 state = MOVING;
                 return false;
             }
             break;
         case FAINTED:
-            
+            // ****************************************** 
+            break;
         case AT_CENTER:
             // instruction_2: Update() should return false
             return false;
@@ -375,7 +383,7 @@ bool Trainer :: Update() {
             // instruction_2: Update() should reduce the amount of PokeDollars based on the dollar cost for the current gym request
             PokeDollars -= current_gym -> GetPokeDollarCost(battles_to_buy);    // <in PokemonGym>
 
-            // instruction_2: Update() should increase Trainer experience based on experience gain for the current gym request (should be calculated using TrainTrainer() function)
+            // instruction_2: Update() should increase Trainer experience based on experience gain for the current gym request (should be calculated using TrainPokemon() function)
             experience_gained = current_gym -> TrainPokemon(battles_to_buy);   // <in PokemonGym>
             experience += experience_gained;
 
