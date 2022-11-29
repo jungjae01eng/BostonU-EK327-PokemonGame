@@ -122,17 +122,20 @@ unsigned int PokemonGym :: GetExperiencePerBattle() {
 }
 
 bool PokemonGym :: Update() {
+    // unsure of instruction_3
     if (passed() == true)
         // should not keep returning true if the PokemonGym is passed.
         return;
     } else if (num_battle_remaining == 0) {
         // instruction_1: if the PokemonGym has zero battles remaining, set the state to DEFEATED
-        // instruction_1: if the PokemonGym has zero battles remaining, set the display code to 'g'
-        // instruction_1: if the PokemonGym has zero battles remaining, print "(display_code)(id) has been beaten."
-        // first time when num_battle_remaining became zero
         state = DEFEATED;
+
+        // instruction_1: if the PokemonGym has zero battles remaining, set the display code to 'g'
         display_code = 'g';
+
+        // instruction_1: if the PokemonGym has zero battles remaining, print "(display_code)(id) has been beaten."
         cout << display_code << id_num << " has been beaten." << endl;
+
         return true;
     } else {
         // instruction_2: return false if battles still remain within the PokemonGym

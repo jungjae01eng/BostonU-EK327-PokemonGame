@@ -26,9 +26,6 @@ Building :: Building (char in_code, int in_Id, Point2D in_loc) {
 
     // initialize display_code to in_code
     display_code = in_code;
-
-    // initialize remainder of the member variables to their default initial values
-    state = 0;
 }
 
 void Building :: AddOneTrainer () {
@@ -45,8 +42,9 @@ void Building :: RemoveOneTrainer () {
 
 void Building :: ShowStatus () {
     // prints "(display_code)(id) located at (location)"
-    // prints "(trainer_count) trainers is/are in this building"
     cout << "(" << display_code << ")(" << GetId() << " at (" << GetLocation() << ")" << endl;
+
+    // prints "(trainer_count) trainers is/are in this building"
     cout << "(" << trainer_count << ") trainers is/are in this building" << endl;
     return;
 }

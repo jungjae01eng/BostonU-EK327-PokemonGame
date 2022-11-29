@@ -43,22 +43,19 @@ Model :: Model() {
 
     // PokemonGym
     PokemonGym* G1 = new PokemonGym(10, 1, 2, 3, 1, Point2D(0, 0));
-    // health cost = 1
     object_ptrs[4] = G1;
     gym_ptrs[0] = G1;
 
     PokemonGym* G2 = new PokemonGym(20, 5, 7.5, 4, 2, Point2D(5, 5));
-    // health cost = 5
     object_ptrs[5] = G2;
     gym_ptrs[1] = G2;
 
-    
+    // initialize
     num_objects = 6;
     num_trainers = 2;
     num_centers = 2;
     num_gym = 2;
 
-    
     return;
 }
 
@@ -106,7 +103,7 @@ void Model :: Display(View &view) {
     // outputs the time
     cout << time << endl;
 
-    // generates the view display for all of the GameObjects
+    // generates the view display for all the GameObjects
 
     return;
 }
@@ -115,7 +112,7 @@ void ShowStatus() {
     // outputs the time
     cout << time << endl;
 
-    // outputs the status of all of the GameObjects by calling their ShowStatus() function
+    // outputs the status of all the GameObjects by calling their ShowStatus() function
 
     return;
 }

@@ -57,9 +57,9 @@ PokemonCenter :: PokemonCenter(int in_id, double potion_cost, unsigned int potio
     // instruction_2: print out the message "PokemonCenter constructed!"
     cout << "PokemonCenter constructed!" << endl;
 
-    // ** rest of the variables are assigned default values **
-//    display_code = 'C';
-//    num_potions_remaining = potion_capacity;
+    // rest of the variables are assigned default values
+    display_code = 'C';
+    num_potions_remaining = potion_capacity;
 }
 
 PokemonCenter :: ~PokemonCenter() {
@@ -110,15 +110,19 @@ unsigned int PokemonCenter :: DistributePotion(unsigned int potion_needed) {
 }
 
 bool PokemonCenter :: Update() {
-    // instruction_1: if PokemonCenter has no potions remaining, set state to NO_POTIONS_AVAILABLE
-    // instruction_1: if PokemonCenter has no potions remaining, display_code to 'c'
-    // instruction_1: if PokemonCenter has no potions remaining, print out "PokemonCenter (id number) has run out of potions."
-    // instruction_1: if PokemonCenter has no potions remaining, returns true if potion is depleted
+    // unsure of the instruction_2
+
     if (num_potions_remaining == 0) {
-        // unsure of instruction_2
+        // instruction_1: if PokemonCenter has no potions remaining, set state to NO_POTIONS_AVAILABLE
         state = NO_POTIONS_AVAILABLE;
+
+        // instruction_1: if PokemonCenter has no potions remaining, display_code to 'c'
         display_code = 'c';
+
+        // instruction_1: if PokemonCenter has no potions remaining, print out "PokemonCenter (id number) has run out of potions."
         cout << "PokemonCenter " << GetId() << " has run out of potions." << endl;
+
+        // instruction_1: if PokemonCenter has no potions remaining, returns true if potion is depleted
         return true;
     } else if (num_potions_remaining > 0) {
         // instruction_1: returns false if it is not depleted

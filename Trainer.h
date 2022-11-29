@@ -36,19 +36,19 @@ class Trainer : public GameObject {
     };
 
     private:
-        double speed;
-        bool is_at_center;
-        bool is_IN_GYM;
+        double speed;       // speed the object travels, expressed as distance per update ime unit
+        bool is_at_center;  // true if the Trainer is in a PokemonCenter
+        bool is_IN_GYM;     // true if the Trainer is in a PokemonGym
         unsigned int health = 20;
         unsigned int experience = 0;
         double PokeDollars = 0;
-        unsigned int battles_to_buy = 0;
-        unsigned int potions_to_buy = 0;
-        string name;
-        PokemonCenter* current_center = 0;
-        PokemonGym* current_gym = 0;
-        Point2D destination;
-        Vector2D delta;
+        unsigned int battles_to_buy = 0;    // stores the number of battles to buy when in a PokemonGym
+        unsigned int potions_to_buy = 0;    // stores the number of potions to buy when in a PokemonCenter
+        string name;        // Name of the Trainer
+        PokemonCenter* current_center = 0;  // a pointer to the current PokemonCenter
+        PokemonGym* current_gym = 0;        // a pointer to the current PokemonGym
+        Point2D destination;        // the object's current destination coordinates in the real plane
+        Vector2D delta;     // contains the x and y amounts that the object will move on each time unit
 
     protected:
         bool UpdateLocation();

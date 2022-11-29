@@ -59,7 +59,7 @@ void View :: Plot(GameObject* ptr){
             grid[x][y][0] = ' ';
             grid[x][y][1] = ' ';
         } else{
-            // getsubscripts are valid
+            // get-subscripts are valid
             ptr->DrawSelf(grid[x][y]);
         }
     }
