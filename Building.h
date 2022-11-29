@@ -8,10 +8,12 @@
 #include <cmath>
 #include "GameObject.h"
 
+using namespace std;
+
 
 // prototyped
-#ifndef BUILDING.H
-#define BUILDING.H
+#ifndef BUILDING_H
+#define BUILDING_H
 
 class Building : public GameObject {
     // inherits from GameObject (base class)

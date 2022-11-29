@@ -6,11 +6,16 @@
 // required header-file
 #include <iostream>
 #include <cmath>
+#include "GameObject.h"
+#include "Trainer.h"
+#include "PokemonCenter.h"
+#include "PokemonGym.h"
+#include "View.h"
 
 
 // prototyped
-#ifndef MODEL.H
-#define MODEL.H
+#ifndef MODEL_H
+#define MODEL_H
 
 class Model {
     private:
@@ -22,7 +27,7 @@ class Model {
         PokemonCenter *center_ptrs[10];
         int num_centers;
         PokemonGym *gym_ptrs[10];
-        int num_gyms;
+        int num_gym;
     public:
         Model();
         ~Model();
@@ -30,7 +35,7 @@ class Model {
         PokemonCenter *GetPokemonCenterPtr(int id);
         PokemonGym *GetPokemonGymPtr(int id);
         bool Update();
-        void Display(view &view);
+        void Display(View &view);
         void ShowStatus();
 };
 

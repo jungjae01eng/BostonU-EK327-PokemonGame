@@ -46,6 +46,11 @@ PokemonCenter :: PokemonCenter(int in_id, double potion_cost, unsigned int potio
     cout << "PokemonCenter constructed" << endl;
 }
 
+PokemonCenter :: ~PokemonCenter() {
+    cout << "PokemonCenter destructed" << endl;
+    return;
+}
+
 bool PokemonCenter :: HasPotions() {
     // returns true if PokemonCenter contains at least one potion
     // returns false otherwise
@@ -98,7 +103,7 @@ bool PokemonCenter :: Update() {
         display_code = 'c';
         cout << "PokemonCenter " << GetId() << " has run out of potions." << endl;
         return true;
-    } esle if (potion_capacity > 0) {
+    } else if (potion_capacity > 0) {
         return false;
     }
 }

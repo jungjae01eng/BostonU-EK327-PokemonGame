@@ -6,13 +6,14 @@
 // required header-file
 #include <iostream>
 #include <cmath>
+#include <string>
 
 using namespace std;
-g++
+
 
 // prototyped
-#ifndef VECTOR2D.H
-#define VECTOR2D.H
+#ifndef VECTOR2D_H
+#define VECTOR2D_H
 
 class Vector2D {
     public:

@@ -6,14 +6,15 @@
 // required header-file
 #include <iostream>
 #include <cmath>
-#include "Building.h"
-#include "PokemonCenter.h"
-#include "PokemonGym.h"
-
+#include "Point2D.h"
+#include "GameObject.h"
 
 // prototyped
-#ifndef PA_3_VIEW_H
-#define PA_3_VIEW_Hs
+#ifndef VIEW_H
+#define VIEW_H
+
+const int view_maxsize = 20;
+
 
 class View {
     private:
@@ -23,14 +24,11 @@ class View {
         char grid[view_maxsize][view_maxsize][2];
         bool GetSubscripts(int &out_x, int &out_y, Point2D location);
     public:
-        view();
-        void clear();
-        void Plot();
-//    void DrawSelf(char *ptr);
-//    const int view_maxsize = 20;
-
+        View();
+        void Clear();
+        void Plot(GameObject* ptr);
+        void Draw();
 };
 
 
-
-#endif //PA_3_VIEW_H
+#endif

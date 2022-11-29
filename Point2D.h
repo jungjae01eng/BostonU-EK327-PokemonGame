@@ -6,12 +6,15 @@
 // required header-file
 #include <iostream>
 #include <cmath>
+#include <string>
 #include "Vector2D.h"
+
+using namespace std;
 
 
 // prototyped
-#ifndef POINT2D.H
-#define POINT2D.H
+#ifndef POINT2D_H
+#define POINT2D_H
 
 class Point2D {
     // public member functions

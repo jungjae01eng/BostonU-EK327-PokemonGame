@@ -19,6 +19,7 @@ PokemonGym :: PokemonGym() {
     health_cost_per_battle = 1;
     PokeDollar_cost_per_battle = 1.0;
     experience_per_battle = 2;
+
     cout << "PokemonGym default constructed" << endl;
 }
 
@@ -37,6 +38,11 @@ PokemonGym :: PokemonGym(unsigned int max_battle, unsigned int health_loss, doub
     cout << "PokemonGym constructed." << endl;
 }
 
+PokemonGym :: ~PokemonGym() {
+    cout << "PokemonGym destructed" << endl;
+    return;
+}
+
 double PokemonGym :: GetPokeDollarCost(unsigned int battle_qty) {
     // returns the cost of battling "battle_qty" times
     return PokeDollar_cost_per_battle * battle_qty;
@@ -52,7 +58,7 @@ unsigned int PokemonGym :: GetNumBattlesRemaining() {
     return num_battle_remaining;
 }
 
-bool IsAbleToBattle(unsigned int battle_qty, double budget, unsigned int health) {
+bool PokemonGym :: IsAbleToBattle(unsigned int battle_qty, double budget, unsigned int health) {
     // return true if trainer in PokemonGym with given budget and Pokemon health can request to take battle_qty battle
     if ((budget - GetPokeDollarCost(battle_qty) > 0) && (health - GetHealthCost(battle_qty))) {
         return true;
@@ -61,7 +67,7 @@ bool IsAbleToBattle(unsigned int battle_qty, double budget, unsigned int health)
     return false;
 }
 
-unsigned int TrainPokemon(unsigned int battle_units) {
+unsigned int PokemonGym :: TrainPokemon(unsigned int battle_units) {
     unsigned int experience_gain;
 
     // instruction_1: subtracts battles from num_battles_remaining if the PokemonGym has enough units'
@@ -69,11 +75,11 @@ unsigned int TrainPokemon(unsigned int battle_units) {
     // instruction_1: if the amount of battles requested is greater than the amount available at the PokemonGym, then num_battles_remaining wll be used instead of battle_units when calculating experience gain
     // instruction_2: returns the amount of experience gained by winning the battles'
     // instruction_3: calculate experience points using (number of battles) * experience_per_battle
-    if (num_battles_remaining >= battle_units) {
-        num_battles_remaining = num_battles_remaining - battle_units;
+    if (num_battle_remaining >= battle_units) {
+        num_battle_remaining -= battle_units;
         return battle_units * experience_per_battle;
     } else {
-        experience_gain = num_battle_remaining * experience_per_batttle;
+        experience_gain = num_battle_remaining * experience_per_battle;
         num_battle_remaining = 0;
         return experience_gain;
     }

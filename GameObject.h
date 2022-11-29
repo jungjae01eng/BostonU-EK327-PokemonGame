@@ -13,8 +13,8 @@ using namespace std;
 
 
 // prototyped
-#ifndef GAMEOBJECT.H
-#define GAMEOBJECT.H
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
 
 class GameObject {
     protected:
@@ -32,6 +32,7 @@ class GameObject {
         int GetId();        // access to id_num
         char GetState();    // access to state
         void ShowStatus();
+        void DrawSelf(char *ptr);   // from View()
 };
 
 

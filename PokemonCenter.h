@@ -8,10 +8,12 @@
 #include <cmath>
 #include "Building.h"
 
+using namespace std;
+
 
 // prototyped
-#ifndef POKEMONCENTER.H
-#define POKEMONCENTER.H
+#ifndef POKEMONCENTER_H
+#define POKEMONCENTER_H
 
 class PokemonCenter : public Building {
     // inherits from Building

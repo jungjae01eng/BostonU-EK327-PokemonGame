@@ -11,10 +11,12 @@
 #include "PokemonCenter.h"
 #include "PokemonGym.h"
 
+using namespace std;
+
 
 // prototyped
-#ifndef TRAINER.H
-#define TRAINER.H
+#ifndef TRAINER_H
+#define TRAINER_H
 
 class Trainer : public GameObject {
     // inherits from GameObject
@@ -64,6 +66,7 @@ class Trainer : public GameObject {
         bool ShouldBeVisible();
         void ShowStatus();
         bool Update();
+        string GetName();
 };
 
 double GetRandomAmountOfPokeDollars();
