@@ -2,9 +2,9 @@ CC=g++ -std=c++11 -g
 
 OBJS=main.o Building.o Point2D.o Vector2D.o GameObject.o GameCommand.o PokemonCenter.o Model.o Trainer.o PokemonGym.o View.o
 
-default: PA3
+default: Pokemon_Game-main_v2
 
-PA3: $(OBJS)
+Pokemon_Game-main_v2: $(OBJS)
 	$(CC) -o PA3 $(OBJS) 
 
 Vector2D.o: Vector2D.cpp Vector2D.h
@@ -42,11 +42,11 @@ main.o: main.cpp Building.h Point2D.h Vector2D.h GameCommand.h PokemonCenter.h M
 
 #checkpoint commands below
 
-checkpoint1: TestCheckPoint1.cpp Point2D.o Vector2D.o GameObject.o
-	$(CC) -o checkpoint1.exe TestCheckPoint1.cpp Point2D.o Vector2D.o GameObject.o
-	
-checkpoint2: TestCheckPoint2.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o
-	$(CC) -o checkpoint2.exe TestCheckPoint2.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o
+#checkpoint1: TestCheckPoint1.cpp Point2D.o Vector2D.o GameObject.o
+#	$(CC) -o checkpoint1.exe TestCheckPoint1.cpp Point2D.o Vector2D.o GameObject.o
+#
+#checkpoint2: TestCheckPoint2.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o
+#	$(CC) -o checkpoint2.exe TestCheckPoint2.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o
 	
 #add your own tests for other checkpoints here
 
@@ -54,4 +54,4 @@ finalcheckpoint: main.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCe
 	$(CC) -g -o PA3.exe main.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o Trainer.o Model.o View.o GameCommand.o
 
 clean: 
-	rm $(OBJS) PA3 *.exe
+	rm $(OBJS) Pokemon_Game-main_v2 *.exe

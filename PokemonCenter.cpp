@@ -102,7 +102,7 @@ unsigned int PokemonCenter :: DistributePotion(unsigned int potion_needed) {
     if (num_potions_remaining >= potion_needed) {
         num_potions_remaining -= potion_needed;
         return potion_needed;
-    } else if (num_potions_remaining < potion_needed) {
+    } else { //if (num_potions_remaining < potion_needed) - Make a warning when putting else if due to control reaches end of non-void function
         // instruction_1: if amount of potions in the PokemonCenter < potion_needed, it returns the PokemonCenter current amount, and the PokemonCenter potion amount is set to 0
         num_potions_remaining = 0;
          return num_potions_remaining;
@@ -124,7 +124,7 @@ bool PokemonCenter :: Update() {
 
         // instruction_1: if PokemonCenter has no potions remaining, returns true if potion is depleted
         return true;
-    } else if (num_potions_remaining > 0) {
+    } else { // if (num_potions_remaining > 0) - Make a warning when putting else if due to control reaches end of non-void function
         // instruction_1: returns false if it is not depleted
         return false;
     }
