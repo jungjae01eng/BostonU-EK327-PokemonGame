@@ -62,7 +62,7 @@ void Trainer :: StartMoving(Point2D dest) {
 
     // instruction_2: calls the setup_destination() function
     destination = dest;
-    this -> setup_destination(Point2D destination);
+    this -> SetupDestination(destination);
 
     if (state == FAINTED) {
         // instruction_5: if the trainer is infected print "(display_code)(id): My pokemon have fainted. I may move, but you cannot see me."
@@ -87,7 +87,6 @@ void Trainer :: StartMoving(Point2D dest) {
 
 //        SetupDestination(dest);
     }
-
     return;
 }
 
@@ -111,7 +110,6 @@ void Trainer :: StartMovingToGym(PokemonGym* gym) {
         // instruction_5: prints the message "(display_code)(id): on my way to gym (gym id)."
         cout << "(" << display_code << ")(" << id_num << "): On my way to gym (" << gym->GetId() << ")" << endl;
     }
-
     return;
 }
 
@@ -135,7 +133,6 @@ void Trainer :: StartMovingToCenter(PokemonCenter* center) {
         // instruction_5: prints the message "(display_code)(id): On my way to Center (center id)."
         cout << display_code << id_num << ": On my way to Center " << center -> GetId() << "." << endl;
     }
-
     return;
 }
 
@@ -192,13 +189,13 @@ void Trainer :: StartRecoveringHealth(unsigned int num_potions) {
         state = RECOVERING_HEALTH;
 
         // instruction_2: if above instruction_3 false, prints the message "(display_code)(id): Started recovering (num_potions) potions at Pokemon Center (current_center_id)."
-        cout << display_code << id_num << ": Started recovering " << num_potions << " potions at Pokemon Center " << center -> GetId() << "." << endl;
+        cout << display_code << id_num << ": Started recovering " << num_potions << " potions at Pokemon Center " << current_center -> GetId() << "." << endl;
 
         // instruction_3: if the Trainer can start recovering health, set its potions_to_buy to the minimum of the requested potions'
-        potions_to_buy = ;
+        // potions_to_buy = ;
 
         // instruction_3: if the Trainer can start recovering health, update the remaining potions in the center
-        num_potions_remaining -> Update();
+        // PokemonCenter.GetNumPotionRemaining -> Update();
 
         // instruction_4: Five health is recovered for each potion purchased
         health += (5 * num_potions);
@@ -311,6 +308,7 @@ bool Trainer :: Update() {
             // The Trainer does nothing and stays in this state
             // instruction_2: Update() return false
             return false;
+            break;
         case MOVING:
             // instruction_2: Update() should call UpdateLocation() to take a step
             this -> UpdateLocation();
@@ -325,14 +323,17 @@ bool Trainer :: Update() {
                 state = MOVING;
                 return false;
             }
+            break;
         case FAINTED:
             
         case AT_CENTER:
             // instruction_2: Update() should return false
             return false;
+            break;
         case IN_GYM:
             // instruction_2: Update() should return false
             return false;
+            break;
         case MOVING_TO_CENTER:
             // instruction_2: Update() should call UpdateLocation()
             this -> UpdateLocation();
@@ -348,6 +349,7 @@ bool Trainer :: Update() {
                 state = MOVING_TO_CENTER;
                 return false;
             }
+            break;
         case MOVING_TO_GYM:
             // instruction_2: Update() should call UpdateLocation()
             this -> UpdateLocation();
@@ -364,7 +366,9 @@ bool Trainer :: Update() {
                 state = MOVING;
                 return false;
             }
+            break;
         case BATTLING_IN_GYM:
+            unsigned int experience_gained;
             // instruction_2: Update() should reduce Trainer health based on total health cost for the current gym request
             health -= current_gym -> GetHealthCost(battles_to_buy);     // <in PokemonGym>
 
@@ -372,7 +376,7 @@ bool Trainer :: Update() {
             PokeDollars -= current_gym -> GetPokeDollarCost(battles_to_buy);    // <in PokemonGym>
 
             // instruction_2: Update() should increase Trainer experience based on experience gain for the current gym request (should be calculated using TrainTrainer() function)
-            unsigned int experience_gained = current_gym -> TrainPokemon(battles_to_buy);   // <in PokemonGym>
+            experience_gained = current_gym -> TrainPokemon(battles_to_buy);   // <in PokemonGym>
             experience += experience_gained;
 
             // instruction_2: Update() should print "** (name) completed (battles_to_buy) battle(s)! **"
@@ -386,14 +390,18 @@ bool Trainer :: Update() {
 
             // instruction_2: Update() should return true
             return true;
+            break;
         case RECOVERING_HEALTH:
             // instruction_2: Update() should increase Health (Health should be calculated by StartRecoveringHealth() function)
-            void StartRecoveringHealth(num_potions);
+            unsigned int prior_health = health;
+
+            void StartRecoveringHealth(unsigned int num_potions);
 
             // instruction_2: Update() should reduce PokeDollars by the total cost of potions for the current PokemonCenter
             PokeDollars -= current_center -> GetPokeDollarCost(potions_to_buy); // <in PokemonCenter>
 
             // instruction_2: Update() should prints "** (name) recovered (health recovered) health! **"
+            unsigned int health_gain = health - prior_health;
             cout << "** " << name << " recovered " << health_gain << " health! **" << endl;
 
             // instruction_2: Update() should prints "** (name) bought (potions_received) potion(s)! **"
@@ -404,6 +412,7 @@ bool Trainer :: Update() {
 
             // instruction_2: Update() should return true
             return true;
+            break;
     }
 }
 

@@ -96,12 +96,12 @@ bool Model :: Update() {
     // if all Trainers are fainted and can't move, print "GAME OVER: You lose! All of your Trainers' pokemon have fainted!"
     // once play finish OR fainted and can't move, exit the game using exit function
 
-    return;
+    // return;
 }
 
 void Model :: Display(View &view) {
     // outputs the time
-    cout << time << endl;
+    // cout << time << endl;
 
     // generates the view display for all the GameObjects
 
@@ -110,7 +110,7 @@ void Model :: Display(View &view) {
 
 void ShowStatus() {
     // outputs the time
-    cout << time << endl;
+    // cout << time << endl;
 
     // outputs the status of all the GameObjects by calling their ShowStatus() function
 

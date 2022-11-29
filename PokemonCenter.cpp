@@ -100,7 +100,7 @@ double PokemonCenter :: GetPokeDollarCost(unsigned int potion) {
 unsigned int PokemonCenter :: DistributePotion(unsigned int potion_needed) {
     // instruction_1: if num_potions_remaining >= potion_needed, it subtracts potion_needed from PokemonCenter amount and returns potion_needed
     if (num_potions_remaining >= potion_needed) {
-        num_potions_remaining -= potion_needed
+        num_potions_remaining -= potion_needed;
         return potion_needed;
     } else if (num_potions_remaining < potion_needed) {
         // instruction_1: if amount of potions in the PokemonCenter < potion_needed, it returns the PokemonCenter current amount, and the PokemonCenter potion amount is set to 0

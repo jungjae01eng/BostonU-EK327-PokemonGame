@@ -123,9 +123,9 @@ unsigned int PokemonGym :: GetExperiencePerBattle() {
 
 bool PokemonGym :: Update() {
     // unsure of instruction_3
-    if (passed() == true)
+    if (passed() == true) {
         // should not keep returning true if the PokemonGym is passed.
-        return;
+        return true;
     } else if (num_battle_remaining == 0) {
         // instruction_1: if the PokemonGym has zero battles remaining, set the state to DEFEATED
         state = DEFEATED;
