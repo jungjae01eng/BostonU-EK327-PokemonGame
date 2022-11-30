@@ -13,6 +13,7 @@
 #include "Building.h"
 #include "PokemonCenter.h"
 #include "PokemonGym.h"
+//#include "GameObject.h"
 
 using namespace std;
 

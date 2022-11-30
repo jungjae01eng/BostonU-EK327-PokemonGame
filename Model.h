@@ -22,12 +22,12 @@ class Model {
         int time;
         GameObject *object_ptrs[10];
         int num_objects;
-        Trainer *trainer_pts[10];
+        Trainer *trainer_ptrs[10];
         int num_trainers;
         PokemonCenter *center_ptrs[10];
         int num_centers;
         PokemonGym *gym_ptrs[10];
-        int num_gym;
+        int num_gyms;
     public:
         Model();
         ~Model();

@@ -314,7 +314,6 @@ bool Trainer :: Update() {
             // the Trainer does nothing and stays in this state
             // instruction_2: Update() return false
             return false;
-            break;
         case MOVING:
             // instruction_2: Update() should call UpdateLocation() to take a step
             this -> UpdateLocation();
@@ -330,18 +329,15 @@ bool Trainer :: Update() {
                 state = MOVING;
                 return false;
             }
-            break;
         case FAINTED:
             // ****************************************** 
             break;
         case AT_CENTER:
             // instruction_2: Update() should return false
             return false;
-            break;
         case IN_GYM:
             // instruction_2: Update() should return false
             return false;
-            break;
         case MOVING_TO_CENTER:
             // instruction_2: Update() should call UpdateLocation()
             this -> UpdateLocation();
@@ -398,7 +394,6 @@ bool Trainer :: Update() {
 
             // instruction_2: Update() should return true
             return true;
-            break;
         case RECOVERING_HEALTH:
             // instruction_2: Update() should increase Health (Health should be calculated by StartRecoveringHealth() function)
             unsigned int prior_health = health;
@@ -420,8 +415,8 @@ bool Trainer :: Update() {
 
             // instruction_2: Update() should return true
             return true;
-            break;
     }
+    return 0;
 }
 
 bool Trainer :: UpdateLocation() {
@@ -434,7 +429,6 @@ bool Trainer :: UpdateLocation() {
         this -> location.x += delta.x;
         this -> location.y += delta.y;
     }
-
 
     if (GetDistanceBetween(destination, location) == 0) {
         // instruction_2: if Trainer has arrived at its destination, prints "(display_code)(id): I'm there!"
@@ -476,3 +470,7 @@ double GetRandomAmountOfPokeDollars() {
 string Trainer :: GetName() {
     return name;
 }
+
+//char Trainer :: GetState() {  // was going to create GetState; however, since Trainer is inherits from GameObject, we should have access to their GetState()
+//    return state; // Getting an error
+//}
