@@ -99,13 +99,18 @@ bool Model :: Update() {
     // increments the time
     time ++;
 
-    // iterates throughout the object_ptrs array
 
-//    for () {
-//         // calls Update() for each object - GameObject::Update() - made virtual
-//        bool GameOb = object_ptrs -> Update();
-//         // return true if any one of the GameObject::Update() calls returned true
-//    }
+    for (int i = 0; i < num_objects; i++) {
+        // iterates throughout the object_ptrs array
+        // calls Update() for each object - GameObject::Update() - made virtual
+        bool GameOb = object_ptrs[i] -> Update();
+
+        // return true if any one of the GameObject::Update() calls returned true
+        if (GameOb) {
+            return true;
+        }
+        return false;
+    }
     if ((gym_ptrs[0] -> GetNumBattlesRemaining() == 0) && gym_ptrs[1] -> GetNumBattlesRemaining() == 0) {
         // if the player finished all the PokemonGyms, print "GAME OVER: You win! All battles done!"
         // no more battles remaining
@@ -122,18 +127,24 @@ bool Model :: Update() {
 
 void Model :: Display(View &view) {
     // outputs the time
-    // cout << time << endl;
+    cout << time << endl;
 
     // generates the view display for all the GameObjects
-
+    view.Clear();
+    for (int i = 0; i < num_objects; i++) {
+        view.Plot(object_ptrs[i]);
+    }
+    view.Draw();
     return;
 }
 
 void Model :: ShowStatus() {
     // outputs the time
-    // cout << time << endl;
+    cout << time << endl;
 
     // outputs the status of all the GameObjects by calling their ShowStatus() function
-
+    for (int i = 0; i < num_objects; i++) {
+        object_ptrs[i] -> ShowStatus();
+    }
     return;
 }

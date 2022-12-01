@@ -19,7 +19,8 @@
 using namespace std;
 
 
-Trainer :: Trainer() {
+Trainer :: Trainer()
+        :GameObject('T') {
     // instruction_1: initializes the speed to 5
     speed = 5;
 
@@ -27,7 +28,8 @@ Trainer :: Trainer() {
     cout << "Trainer default constructed!" << endl;
 }
 
-Trainer :: Trainer(char in_code) {
+Trainer :: Trainer(char in_code)
+        :GameObject(in_code) {
     // instruction_1: initializes the speed to 5
     speed = 5;
 
@@ -41,7 +43,8 @@ Trainer :: Trainer(char in_code) {
     display_code = in_code;
 }
 
-Trainer :: Trainer(string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc) {
+Trainer :: Trainer(string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc)
+        :GameObject(in_loc,in_id,in_code) {
     // instruction_1: initializes the speed to in_speed
     speed = in_speed;
 

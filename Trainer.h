@@ -59,7 +59,7 @@ class Trainer : public GameObject {
         Trainer();
         Trainer(char in_code);
         Trainer(string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc);
-        ~Trainer();
+        virtual ~Trainer();
         void StartMoving(Point2D dest);
         void StartMovingToGym(PokemonGym* gym);
         void StartMovingToCenter(PokemonCenter* center);

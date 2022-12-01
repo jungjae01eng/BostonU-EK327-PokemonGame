@@ -77,21 +77,27 @@ void DoRecoverInCenterCommand(Model &model, int trainer_id, unsigned int potions
 
 void DoAdvanceCommand(Model &model, View &view) {
     // call Model::Update() to update all the objects
-    // Model::Update();
+    model.Update();
+    model.ShowStatus();
 
     // call Model::Display() to display the current view of the game
-    // Model::Display();
+    model.Display(view);
 
     cout << "Advancing one tick." << endl;
     return;
 }
 
 void DoRunCommand(Model &model, View &view) {
-    // call Model::Update() to update all the objects
-    // Model::Update();
+    for (int i = 0; i < 5; i++) {
+        // call Model::Update() to update all the objects
+        if (model.Update()) {
+            break;
+        }
+    }
+    model.ShowStatus();
 
     // call Model::Display() to display the current view of the game
-    // Model::Display();
+    model.Display(view);
 
     cout << "Advancing to next event." << endl;
     return;

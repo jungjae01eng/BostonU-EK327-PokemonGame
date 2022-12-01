@@ -2,9 +2,9 @@ CC=g++ -std=c++11 -g
 
 OBJS=main.o Building.o Point2D.o Vector2D.o GameObject.o GameCommand.o PokemonCenter.o Model.o Trainer.o PokemonGym.o View.o
 
-default: Pokemon_Game-main_v2
+default: Pokemon_Game-main_v3
 
-Pokemon_Game-main_v2: $(OBJS)
+Pokemon_Game-main_v3: $(OBJS)
 	$(CC) -o PA3 $(OBJS) 
 
 Vector2D.o: Vector2D.cpp Vector2D.h

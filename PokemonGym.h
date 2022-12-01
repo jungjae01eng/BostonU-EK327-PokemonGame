@@ -32,7 +32,7 @@ class PokemonGym : public Building {
     public:
         PokemonGym();
         PokemonGym(unsigned int max_battle, unsigned int health_loss, double PokeDollar_cost, unsigned int exp_per_battle, int in_id, Point2D in_loc);
-        ~PokemonGym();
+        virtual ~PokemonGym();
         double GetPokeDollarCost(unsigned int battle_qty);
         unsigned int GetHealthCost(unsigned int battle_qty);
         unsigned int GetNumBattlesRemaining();
