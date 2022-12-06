@@ -37,7 +37,6 @@ Vector2D operator * (Vector2D v1, double d) {
     v_new.x = x;
     v_new.y = y;
 
-
     return v_new;
 }
 
@@ -60,14 +59,12 @@ Vector2D operator / (Vector2D v1, double d) {
     v_new.x = x;
     v_new.y = y;
 
-
     return v_new;
 }
 
 ostream& operator << (ostream& out, Vector2D v1) {
     // overloaded operator: return output formatted as <x, y>
     out << "<" << v1.x << ", " << v1.y << ">";
-
 
     return out;
 }

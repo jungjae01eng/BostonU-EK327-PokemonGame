@@ -16,7 +16,8 @@
 using namespace std;
 
 
-PokemonGym :: PokemonGym() {
+PokemonGym :: PokemonGym()
+           : Building() {
     // instruction_1: display code should be 'G' (Gym)
     display_code = 'G';
 
@@ -44,7 +45,8 @@ PokemonGym :: PokemonGym() {
     cout << "PokemonGym default constructed!" << endl;
 }
 
-PokemonGym :: PokemonGym(unsigned int max_battle, unsigned int health_loss, double PokeDollar_cost, unsigned int exp_per_battle, int in_id, Point2D in_loc) {
+PokemonGym :: PokemonGym(unsigned int max_battle, unsigned int health_loss, double PokeDollar_cost, unsigned int exp_per_battle, int in_id, Point2D in_loc)
+           : Building(display_code, in_id, in_loc) {
     // instruction_1: initializes the id number to in_id
     id_num = in_id;
 

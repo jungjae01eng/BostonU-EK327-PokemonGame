@@ -16,7 +16,8 @@
 using namespace std;
 
 
-PokemonCenter :: PokemonCenter() {
+PokemonCenter :: PokemonCenter()
+              : Building() {
     // instruction_1: display_code should be 'C' (Center)
     display_code = 'C';
 
@@ -38,7 +39,8 @@ PokemonCenter :: PokemonCenter() {
     cout << "PokemonCenter default constructed!" << endl;
 }
 
-PokemonCenter :: PokemonCenter(int in_id, double potion_cost, unsigned int potion_cap, Point2D in_loc) {
+PokemonCenter :: PokemonCenter(int in_id, double potion_cost, unsigned int potion_cap, Point2D in_loc)
+              : Building (display_code, in_id, in_loc) {
     // instruction_1: initialize the id number to in_id
     id_num = in_id;
 
@@ -105,7 +107,7 @@ unsigned int PokemonCenter :: DistributePotion(unsigned int potion_needed) {
     } else { //if (num_potions_remaining < potion_needed) - Make a warning when putting else if due to control reaches end of non-void function
         // instruction_1: if amount of potions in the PokemonCenter < potion_needed, it returns the PokemonCenter current amount, and the PokemonCenter potion amount is set to 0
         num_potions_remaining = 0;
-         return num_potions_remaining;
+        return num_potions_remaining;
     }
 }
 

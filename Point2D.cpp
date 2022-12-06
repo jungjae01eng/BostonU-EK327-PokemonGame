@@ -23,6 +23,11 @@ Point2D :: Point2D (double in_x, double in_y)
 
 }
 
+//Point2D :: ~Point2D() {
+//    // destructor
+//    cout << "Point2D destructed!" << endl;
+//}
+
 double GetDistanceBetween (Point2D p1, Point2D p2) {
     // returns the cartesian distance between p1 and p2
     double delta_x;
@@ -35,16 +40,7 @@ double GetDistanceBetween (Point2D p1, Point2D p2) {
     x_pow = pow(delta_x, 2);    // x power of 2
     y_pow = pow(delta_y, 2);    // y power of 2
 
-
     return (sqrt(x_pow + y_pow));
-}
-
-ostream& operator << (ostream& out, Point2D p1) {
-    // overloaded operator: return output formatted as (x, y)
-    out << "(" << p1.x << ", " << p1.y << ")";
-
-
-    return out;
 }
 
 Point2D operator + (Point2D p1, Vector2D v1) {
@@ -58,7 +54,6 @@ Point2D operator + (Point2D p1, Vector2D v1) {
     Point2D p_new;
     p_new.x = x;
     p_new.y = y;
-
 
     return p_new;
 }
@@ -75,6 +70,12 @@ Vector2D operator - (Point2D p1, Point2D p2) {
     v_new.x = x;
     v_new.y = y;
 
-
     return v_new;
+}
+
+ostream& operator << (ostream& out, Point2D p1) {
+    // overloaded operator: return output formatted as (x, y)
+    out << "(" << p1.x << ", " << p1.y << ")";
+
+    return out;
 }

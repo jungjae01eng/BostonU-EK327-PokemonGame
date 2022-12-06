@@ -11,45 +11,52 @@
 using namespace std;
 
 
-Building :: Building ()    // default constructor
+Building :: Building ()     // default constructor
+         : GameObject('T') {
     // initialize display_code to 'B'
-{
     display_code = 'B';
+
+    // instruction_2: print the message
+    cout << "Building default constructed!" << endl;
 }
 
-Building :: Building (char in_code, int in_Id, Point2D in_loc) {
-    // initialize id number to in_Id
-    id_num = in_Id;
+Building :: Building (char in_code, int in_id, Point2D in_loc)
+         : GameObject(in_loc, in_id, in_code) {
+    // instruction_1: initialize id number to in_Id
+    id_num = in_id;
 
-    // initialize location to in_loc
+    // instruction_1: initialize location to in_loc
     location = in_loc;
 
-    // initialize display_code to in_code
+    // instruction_1: initialize display_code to in_code
     display_code = in_code;
+
+    // instruction_2: print the message
+    cout << "Building constructed!" << endl;
 }
 
 void Building :: AddOneTrainer () {
-    // increments trainer_count by one
+    // instruction_1: increments trainer_count by one
     trainer_count++;
     return;
 }
 
 void Building :: RemoveOneTrainer () {
-    // decrements trainer_count by one
+    // instruction_1: decrements trainer_count by one
     trainer_count--;
     return;
 }
 
 void Building :: ShowStatus () {
-    // prints "(display_code)(id) located at (location)"
-    cout << "(" << display_code << ")(" << GetId() << " at (" << GetLocation() << ")" << endl;
+    // instruction_1: prints "(display_code)(id) located at (location)."
+    cout << display_code << GetId() << " at " << GetLocation() << "." << endl;
 
-    // prints "(trainer_count) trainers is/are in this building"
-    cout << "(" << trainer_count << ") trainers is/are in this building" << endl;
+    // instruction_2: prints "(trainer_count) trainers is/are in this building."
+    cout << trainer_count << " trainers is/are in this building." << endl;
     return;
 }
 
 bool Building :: ShouldBeVisible () {
-    // returns true because buildings are always visible
+    // instruction_1: returns true because buildings are always visible
     return true;
 }

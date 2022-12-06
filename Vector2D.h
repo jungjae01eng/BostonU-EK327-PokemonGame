@@ -7,7 +7,6 @@
 #include <iostream>
 #include <cmath>
 #include <string>
-//#include "Point2D.h"
 
 using namespace std;
 
@@ -17,15 +16,17 @@ using namespace std;
 #define VECTOR2D_H
 
 class Vector2D {
+    // >> public members <<
     public:
-        double x;   // x displacement value of the vector
-        double y;   // y displacement value of the vector
+        double x;       // x displacement value of the vector
+        double y;       // y displacement value of the vector
 
-        Vector2D ();
+        // >> constructors <<
+        Vector2D ();    // default constructor
         Vector2D (double in_x, double in_y);
-        ~Vector2D (); 
 };
 
+// >> non-member overloaded operators <<
 Vector2D operator * (Vector2D v1, double d);
 Vector2D operator / (Vector2D v1, double d);
 ostream& operator << (ostream& out, Vector2D v1);

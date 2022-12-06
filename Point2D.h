@@ -17,20 +17,24 @@ using namespace std;
 #define POINT2D_H
 
 class Point2D {
-    // public member functions
+    // >> public members <<
     public:
         double x;   // x value of the point for cartesian coordinates
         double y;   // y value of the point for cartesian coordinates
 
+        // >> constructors <<
         Point2D(); // default constructor
         Point2D(double in_x, double in_y);
-        ~Point2D();
+//        ~Point2D();     // usually, do not need destructor; however, it makes a linkage error
 };
 
+// >> non-member functions <<
 double GetDistanceBetween (Point2D p1, Point2D p2);
-ostream& operator << (ostream& out, Point2D p1);
+
+// >> non-member overloaded operators <<
 Point2D operator + (Point2D p1, Vector2D v1);
 Vector2D operator - (Point2D p1, Vector2D p2);
+ostream& operator << (ostream& out, Point2D p1);
 
 
 #endif

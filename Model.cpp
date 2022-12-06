@@ -99,7 +99,6 @@ bool Model :: Update() {
     // increments the time
     time ++;
 
-
     for (int i = 0; i < num_objects; i++) {
         // iterates throughout the object_ptrs array
         // calls Update() for each object - GameObject::Update() - made virtual

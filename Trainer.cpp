@@ -20,7 +20,7 @@ using namespace std;
 
 
 Trainer :: Trainer()
-        :GameObject('T') {
+        : GameObject('T') {
     // instruction_1: initializes the speed to 5
     speed = 5;
 
@@ -29,7 +29,7 @@ Trainer :: Trainer()
 }
 
 Trainer :: Trainer(char in_code)
-        :GameObject(in_code) {
+        : GameObject(in_code) {
     // instruction_1: initializes the speed to 5
     speed = 5;
 
@@ -44,7 +44,7 @@ Trainer :: Trainer(char in_code)
 }
 
 Trainer :: Trainer(string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc)
-        :GameObject(in_loc,in_id,in_code) {
+        : GameObject(in_loc, in_id, in_code) {
     // instruction_1: initializes the speed to in_speed
     speed = in_speed;
 
@@ -199,7 +199,6 @@ void Trainer :: StartRecoveringHealth(unsigned int num_potions) {
 
         // instruction_3: if the Trainer can start recovering health, update the remaining potions in the center
         unsigned int GetNumPotionRemaining(potions_to_buy);
-        // ****************************************** is this correct? ^
 
         // instruction_4: Five health is recovered for each potion purchased
         health += (5 * num_potions);
@@ -260,7 +259,7 @@ void Trainer :: ShowStatus() {
             break;
         case 2:     // FAINTED
             // quit the game
-            // ****************************************** 
+            exit(0);
             break;
         case 3:     // AT_CENTER
             // instruction_1: ShowStatus() prints "inside Pokemon Center (current_Center id)."
@@ -333,8 +332,7 @@ bool Trainer :: Update() {
                 return false;
             }
         case FAINTED:
-            // ****************************************** 
-            break;
+            // ******************************************
         case AT_CENTER:
             // instruction_2: Update() should return false
             return false;
@@ -424,11 +422,16 @@ bool Trainer :: Update() {
 
 bool Trainer :: UpdateLocation() {
     // instruction_1: updates the object's location while it is moving
-
     if (fabs(destination.x - location.x) <= delta.x && fabs(destination.y - location.y) <= delta.y) {
         // an object is within the step of the destination
         location = destination;
     } else {
+        // instruction_0: decrease the health by 1 for each "speed-sized" step for any time the Trainer moves
+        health--;
+
+        // instruction_0: increase the dollar count by a random amount for any time te Trainer moves
+        PokeDollars += GetRandomAmountOfPokeDollars();
+
         this -> location.x += delta.x;
         this -> location.y += delta.y;
     }
@@ -442,10 +445,6 @@ bool Trainer :: UpdateLocation() {
     } else {
         // instruction_3: if instruction_2 is false, prints "(display_code)(id): step..."
         cout << display_code << id_num << ": step..." << endl;
-
-        // instruction_0: decrease the health by 1 for each "speed-sized" step for any time the Trainer moves
-        // instruction_0: increase the dollar count by a random amount for any time te Trainer moves
-
         return false;
     }
 }
@@ -473,7 +472,3 @@ double GetRandomAmountOfPokeDollars() {
 string Trainer :: GetName() {
     return name;
 }
-
-//char Trainer :: GetState() {  // was going to create GetState; however, since Trainer is inherits from GameObject, we should have access to their GetState()
-//    return state; // Getting an error
-//}

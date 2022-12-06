@@ -28,9 +28,9 @@ class PokemonCenter : public Building {
         double pokedollar_cost_per_potion;  // per potion cost in PokemonCenter
 
     public:
-        PokemonCenter();
+        PokemonCenter();        // default constructor
         PokemonCenter(int in_id, double potion_cost, unsigned int potion_cap, Point2D in_loc);
-        ~PokemonCenter();
+        ~PokemonCenter();       // destructor
         bool HasPotions();
         unsigned int GetNumPotionRemaining();
         bool CanAffordPotion(unsigned int potion, double budget);

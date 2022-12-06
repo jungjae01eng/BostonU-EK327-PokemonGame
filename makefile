@@ -23,13 +23,13 @@ PokemonCenter.o: PokemonCenter.cpp PokemonCenter.h GameObject.h Point2D.h
 	$(CC) -c PokemonCenter.cpp -o PokemonCenter.o
 
 Model.o: Model.cpp Model.h GameObject.h Trainer.h PokemonGym.h PokemonCenter.h View.h
-	$(CC) -c Model.cpp -o Model.o 
+	$(CC) -c Model.cpp -o Model.o
 
 PokemonGym.o: PokemonGym.cpp PokemonGym.h GameObject.h Point2D.h
 	$(CC) -c PokemonGym.cpp -o PokemonGym.o
 
 View.o: View.cpp View.h GameObject.h Point2D.h
-	$(CC) -c View.cpp -o View.o 
+	$(CC) -c View.cpp -o View.o
 
 Trainer.o: Trainer.cpp Trainer.h GameObject.h Point2D.h Vector2D.h PokemonCenter.h PokemonGym.h
 	$(CC) -c Trainer.cpp -o Trainer.o
@@ -54,4 +54,4 @@ finalcheckpoint: main.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCe
 	$(CC) -g -o PA3.exe main.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o Trainer.o Model.o View.o GameCommand.o
 
 clean: 
-	rm $(OBJS) Pokemon_Game-main_v2 *.exe
+	rm $(OBJS) Pokemon_Game-main_v3 *.exe

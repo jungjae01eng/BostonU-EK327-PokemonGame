@@ -17,7 +17,7 @@ GameObject :: GameObject(char in_code)
     // initialize state to 0,
     // outputs the message: "GameObject constructed!"
 : display_code(in_code), id_num(1), state(0) {
-    cout << "GameObject constructed!" << endl;
+    cout << "GameObject default constructed!" << endl;
 }
 
 GameObject :: GameObject(Point2D in_loc, int in_id, char in_code)
@@ -51,6 +51,19 @@ char GameObject :: GetState() {
 
 void GameObject :: ShowStatus() {
     // outputs "(display_code)(id_num) at (location)""
-    cout << "(" << display_code << ")(" << GetId() << " at (" << GetLocation() << ")" << endl;
+    cout << display_code << GetId() << " at " << GetLocation() << "" << endl;
     return;
+}
+
+void GameObject :: DrawSelf(char *ptr) {
+    // function puts the display_code at the character pointed to by ptr, and then ASCII character for the id_num in the next character.
+    return;
+}
+
+bool GameObject :: Update() {
+    return false;
+}
+
+bool GameObject :: ShouldBeVisible() {
+    return 0;
 }

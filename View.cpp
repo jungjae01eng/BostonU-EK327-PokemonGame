@@ -11,7 +11,7 @@
 using namespace std;
 
 
-bool View :: GetSubscripts(int& out_x, int& out_y, Point2D location){
+bool View :: GetSubscripts(int& out_x, int& out_y, Point2D location) {
     // calculate the column and row subscripts of the grid array
     out_x = (location.x - origin.x) / scale;
     out_y = (location.y - origin.y) / scale;
@@ -23,7 +23,7 @@ bool View :: GetSubscripts(int& out_x, int& out_y, Point2D location){
     return true;
 }
 
-View :: View(){
+View :: View() {
     // initialize size to 11
     size = 11;
 
@@ -36,8 +36,7 @@ View :: View(){
     return;
 }
 
-
-void View :: Clear(){
+void View :: Clear() {
     // sets all the cells of the grid to the background pattern
     for (int i = 0; i < view_maxsize; i++){
         for (int j = 0; j < view_maxsize; j++){
@@ -48,28 +47,28 @@ void View :: Clear(){
     return;
 }
 
-void View :: Plot(GameObject* ptr){
+void View :: Plot(GameObject* ptr) {
     // plots the pointed-to object in the proper cell of the grid
     // calls get_subscripts
 
     int x, y;
 
-    if (GetSubscripts(x, y, ptr -> GetLocation())){
-        if (grid[x][y][0] != '*'){
+    if (GetSubscripts(x, y, ptr -> GetLocation())) {
+        if (grid[x][y][0] != '*') {
             grid[x][y][0] = ' ';
             grid[x][y][1] = ' ';
         } else{
             // get-subscripts are valid
-            ptr->DrawSelf(grid[x][y]);
+            ptr -> DrawSelf(grid[x][y]);
         }
     }
     return;
 }
 
-void View :: Draw(){
+void View :: Draw() {   // given
     // outputs the grid array to produce a display
     // first, outputs the size, scale, and origin
-    // second, outputs the each row and column for the current size of the display
+    // second, outputs each row and column for the current size of the display
     for (int j = size-1; j >= -1; j--) {
         for (int i = -1; i <= size-1; i++) {
             //grid axis
