@@ -1,7 +1,7 @@
 // Jungjae Lee
 // Boston University College of Engineering
 // EC 327 Programming Assignment 3
-// November 23, 2022
+// December 12, 2022
 
 // required header-file
 #include <iostream>
@@ -26,7 +26,7 @@ int main() {
     char command;
     int a1, a2, a3;
 
-    while (true){
+    while(true) {
         // initialize
         command = '0';
         a1 = 0;
@@ -41,7 +41,7 @@ int main() {
         cout << "Enter command: ";
         cin >> command;
 
-        switch (command){
+        switch (command) {
             case 'm': // move
                 cin >> a1 >> a2 >> a3;
                 DoMoveCommand(m, a1, Point2D(a2, a3));

@@ -47,7 +47,7 @@ main.o: main.cpp Building.h Point2D.h Vector2D.h GameCommand.h PokemonCenter.h M
 #
 #checkpoint2: TestCheckPoint2.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o
 #	$(CC) -o checkpoint2.exe TestCheckPoint2.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o
-	
+#
 #add your own tests for other checkpoints here
 
 finalcheckpoint: main.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym..o Trainer.o Model.o View.o GameCommand.o
