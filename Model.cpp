@@ -1,7 +1,17 @@
+// Jungjae Lee
+// Boston University College of Engineering
+// EC 327 Programming Assignment 3
+// November 23, 2022
+
+// required header-file
+#include <iostream>
+#include <cmath>
 #include "Model.h"
 
-Model :: Model()
-{
+using namespace std;
+
+
+Model :: Model() {
     time = 0;
     PokemonCenter* C1 = new PokemonCenter(1,1,100,Point2D(1,20));
     PokemonCenter* C2 = new PokemonCenter(2,2,200,Point2D(10,20));
@@ -26,8 +36,7 @@ Model :: Model()
     cout << "Model default constructed" << endl;
 }
 
-Model :: ~Model()
-{
+Model :: ~Model() {
     for(list <GameObject*> :: iterator iter1 = object_ptrs.begin(); iter1 != object_ptrs.end(); iter1++)
     {
         delete *iter1;
@@ -35,8 +44,7 @@ Model :: ~Model()
     cout << "Model destructed" << endl;
 }
 
-Trainer* Model :: GetTrainerPtr(int id)
-{
+Trainer* Model :: GetTrainerPtr(int id) {
     for (list <Trainer*> :: iterator iter1 = trainer_ptrs.begin(); iter1 != trainer_ptrs.end(); iter1++)
     {
         if ((*iter1)->GetId() == id)
@@ -46,8 +54,7 @@ Trainer* Model :: GetTrainerPtr(int id)
     return nullptr;
 }
 
-PokemonCenter* Model :: GetPokemonCenterPtr(int id)
-{
+PokemonCenter* Model :: GetPokemonCenterPtr(int id) {
     for(list <PokemonCenter*> :: iterator iter1 =center_ptrs.begin(); iter1 != center_ptrs.end(); iter1++)
     {
         if((*iter1)->GetId() == id)
@@ -56,8 +63,7 @@ PokemonCenter* Model :: GetPokemonCenterPtr(int id)
     return nullptr;
 }
 
-PokemonGym* Model :: GetPokemonGymPtr(int id)
-{
+PokemonGym* Model :: GetPokemonGymPtr(int id) {
     for(list <PokemonGym*> :: iterator iter1 = gym_ptrs.begin(); iter1 != gym_ptrs.end(); iter1++)
     {
         if((*iter1)->GetId() == id)
@@ -66,95 +72,75 @@ PokemonGym* Model :: GetPokemonGymPtr(int id)
     return nullptr;
 }
 
-bool Model :: Update()
-{
+bool Model :: Update() {
     time++;
     int output = 0;
     int temp1 = 0;
     int temp2 = 0;
     list <GameObject*> :: iterator iter1;
-    for(iter1 = active_ptrs.begin(); iter1 != active_ptrs.end(); iter1++)
-    {
-        if((*iter1)->Update() == true)
-        {
+    for(iter1 = active_ptrs.begin(); iter1 != active_ptrs.end(); iter1++) {
+        if((*iter1)->Update() == true) {
             output++;
         }
     }
 
-    for(list <GameObject*> :: iterator iter = active_ptrs.begin(); iter != active_ptrs.end(); iter++)
-    {
-        if(!(*iter)->ShouldBeVisible())
-        {
+    for(list <GameObject*> :: iterator iter = active_ptrs.begin(); iter != active_ptrs.end(); iter++) {
+        if(!(*iter)->ShouldBeVisible()) {
             active_ptrs.erase(iter);
             break;
         }
     }
     
     list <PokemonGym*> :: iterator iter2;
-    for(iter2 = gym_ptrs.begin(); iter2 != gym_ptrs.end(); iter2++)
-    {
-        if((*iter2)->GetNumBattlesRemaining() == 0)
-        {
+    for(iter2 = gym_ptrs.begin(); iter2 != gym_ptrs.end(); iter2++) {
+        if((*iter2)->GetNumBattlesRemaining() == 0) {
             temp1++;
         }
     }
 
     list<Trainer*> :: iterator iter3;
-    for(iter3 = trainer_ptrs.begin(); iter3 != trainer_ptrs.end(); iter3++)
-    {
-        if((*iter3)->HasFainted())
-        {
+    for(iter3 = trainer_ptrs.begin(); iter3 != trainer_ptrs.end(); iter3++) {
+        if((*iter3)->HasFainted()) {
             temp2++;
         }
     }
 
-    if (temp1 == gym_ptrs.size())
-    {
+    if (temp1 == gym_ptrs.size()) {
         cout << "GAME OVER: You win! All battles done!" << endl;
         exit(0);
     }
 
-    if(temp2 == trainer_ptrs.size())
-    {
+    if(temp2 == trainer_ptrs.size()) {
         cout << "GAME OVER: You lose! All of your Trainers have lost!" << endl;
         exit(0);
     }
 
-    if(output > 0)
-    {
+    if(output > 0) {
         return true;
     }
 
     return false;
 }
 
-void Model :: Display(View& view)
-{
-    for ( list<GameObject*> :: iterator iter1 = active_ptrs.begin(); iter1 != active_ptrs.end(); iter1++)
-    {
+void Model :: Display(View& view) {
+    for ( list<GameObject*> :: iterator iter1 = active_ptrs.begin(); iter1 != active_ptrs.end(); iter1++) {
         view.Plot(*iter1);
     }
 }
-void Model :: ShowStatus()
-{
+void Model :: ShowStatus() {
     cout << "Time: " << time << endl;
     
-    for(list<GameObject*> :: iterator iter1 = active_ptrs.begin(); iter1 != active_ptrs.end(); iter1++ )
-    {
+    for(list<GameObject*> :: iterator iter1 = active_ptrs.begin(); iter1 != active_ptrs.end(); iter1++ ) {
         (*iter1)->ShowStatus();
     }
 }
 
-void Model :: NewCommand(char type, int in_id, double x, double y)
-{
-    switch(type)
-    {
-        case 'c': 
-        {
-            for(list <PokemonCenter*> :: iterator iter1 = center_ptrs.begin(); iter1 != center_ptrs.end(); iter1++)
-            {
-                if(in_id == (*iter1)->GetId())
-                throw Invalid_Input("Sorry but please enter a Unique Doctor's Office ID");
+void Model :: NewCommand(char type, int in_id, double x, double y) {
+    switch(type) {
+        case 'c': {
+            for(list <PokemonCenter*> :: iterator iter1 = center_ptrs.begin(); iter1 != center_ptrs.end(); iter1++) {
+//                if(in_id == (*iter1)->GetId())
+//                    throw Invalid_Input("Sorry but please enter a Unique Doctor's Office ID");
             }
             PokemonCenter* C = new PokemonCenter(in_id, 100, 2, Point2D(x,y));
             object_ptrs.push_back(C);
@@ -164,12 +150,10 @@ void Model :: NewCommand(char type, int in_id, double x, double y)
             break;
         }
 
-        case 'g':
-        {    
-            for(list <PokemonGym*> :: iterator iter1 = gym_ptrs.begin(); iter1 != gym_ptrs.end(); iter1++)
-            {
-                if(in_id == (*iter1)->GetId())
-                throw Invalid_Input("Sorry but please enter a Unique PokemonGym ID");
+        case 'g': {
+            for(list <PokemonGym*> :: iterator iter1 = gym_ptrs.begin(); iter1 != gym_ptrs.end(); iter1++) {
+//                if(in_id == (*iter1)->GetId())
+//                    throw Invalid_Input("Sorry but please enter a Unique PokemonGym ID");
             }
             PokemonGym* G = new PokemonGym(25,2,10,5,in_id,Point2D(x,y));
             object_ptrs.push_back(G);
@@ -179,12 +163,10 @@ void Model :: NewCommand(char type, int in_id, double x, double y)
             break;
         }
 
-        case 't':
-        {
-            for(list <Trainer*> :: iterator iter1 = trainer_ptrs.begin(); iter1 != trainer_ptrs.end(); iter1++)
-            {
-                if(in_id == (*iter1)->GetId())
-                throw Invalid_Input("Sorry but please enter a Unique Trainer ID");
+        case 't': {
+            for(list <Trainer*> :: iterator iter1 = trainer_ptrs.begin(); iter1 != trainer_ptrs.end(); iter1++) {
+//                if(in_id == (*iter1)->GetId())
+//                    throw Invalid_Input("Sorry but please enter a Unique Trainer ID");
             }
             Trainer* T = new Trainer("NewTrainer",in_id,'S',1,Point2D(x,y));
             object_ptrs.push_back(T);
@@ -192,8 +174,8 @@ void Model :: NewCommand(char type, int in_id, double x, double y)
             trainer_ptrs.push_back(T);
             cout << "New Trainer created" << endl;
             break;
-        } 
+        }
         default:
-        cout << "Unrecognized command code for creating new object" << endl;
+            cout << "Unrecognized command code for creating new object" << endl;
     }
 }

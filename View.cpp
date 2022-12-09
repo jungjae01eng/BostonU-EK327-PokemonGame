@@ -1,11 +1,21 @@
+// Jungjae Lee
+// Boston University College of Engineering
+// EC 327 Programming Assignment 3
+// November 23, 2022
+
+// required header-file
+#include <iostream>
+#include <cmath>
 #include "View.h"
+
+using namespace std;
+
 
 View :: View()
 : size(11),scale(2),origin(Point2D())
 {
 
 }
-
 
 bool View :: GetSubscripts(int& out_x, int& out_y, Point2D location)
 {

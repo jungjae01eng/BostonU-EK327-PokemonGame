@@ -1,12 +1,24 @@
-#ifndef MODEL_H
-#define MODEL_H
+// Jungjae Lee
+// Boston University College of Engineering
+// EC 327 Programming Assignment 3
+// November 23, 2022
 
+// required header-file
+#include <iostream>
+#include <cmath>
 #include "GameObject.h"
 #include "Trainer.h"
 #include "Building.h"
 #include "View.h"
 //#include "Input_Handling.h"
 #include <list>
+
+using namespace std;
+
+
+// prototyped
+#ifndef MODEL_H
+#define MODEL_H
 
 class Model 
 {
@@ -30,4 +42,6 @@ class Model
     //Functions for Object creation
     void NewCommand(char, int, double, double);
 };
+
+
 #endif
